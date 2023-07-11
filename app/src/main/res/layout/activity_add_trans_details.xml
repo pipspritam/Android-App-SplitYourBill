@@ -26,6 +26,8 @@
             android:id="@+id/addPayeeName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:textSize="25sp"
             android:layout_marginBottom="10dp"
             android:hint="Enter Name"/>
@@ -53,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25sp"
+            android:inputType="numberDecimal"
             android:layout_marginBottom="10dp"
             android:hint="Enter Amount"/>
 
@@ -76,6 +79,8 @@
         android:textSize="25sp"
         android:padding="10dp"
         android:layout_marginBottom="10dp"
+        android:inputType="textCapWords"
+        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         android:hint="Add Involved Person"/>
 
     <Button

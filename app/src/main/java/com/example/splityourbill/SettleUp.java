@@ -21,7 +21,7 @@ public class SettleUp extends AppCompatActivity {
     dataBaseHelper dataBaseHelper = new dataBaseHelper(SettleUp.this);
 
     public static void sortPeopleByBalance(List<person> people) {
-        Collections.sort(people, Comparator.comparingDouble(p -> p.balance));
+        people.sort(Comparator.comparingDouble(p -> p.balance));
     }
 
     @Override
@@ -66,14 +66,10 @@ public class SettleUp extends AppCompatActivity {
 
         System.out.println(results_list);
 
-        settleUpArrayAdapter = new ArrayAdapter<String>(SettleUp.this, android.R.layout.simple_list_item_1, results_list);
+        settleUpArrayAdapter = new ArrayAdapter<>(SettleUp.this, android.R.layout.simple_list_item_1, results_list);
         lv.setAdapter(settleUpArrayAdapter);
 
 
-
-
-
-//
 
     }
 }

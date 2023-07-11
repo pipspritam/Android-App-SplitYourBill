@@ -11,10 +11,8 @@ public class person {
 
     @Override
     public String toString() {
-        return "person{" +
-                "name='" + name + '\'' +
-                ", balance=" + balance +
-                '}';
+        return "Name = " + name + " -> " +
+                "Balance = " + balance;
     }
 
     public String getName() {

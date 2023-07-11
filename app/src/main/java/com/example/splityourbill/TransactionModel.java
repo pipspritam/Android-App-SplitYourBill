@@ -15,12 +15,10 @@ public class TransactionModel {
 
     @Override
     public String toString() {
-        return "TransactionModel{" +
-                "payee='" + payee + '\'' +
-                ", amount=" + amount +
-                ", description='" + description + '\'' +
-                ", involve='" + involve + '\'' +
-                '}';
+        return "Payee = " + payee  +
+                " | amount = " + amount +
+                " | description = " + description +
+                " | involve = " + involve;
     }
 
     public TransactionModel() {

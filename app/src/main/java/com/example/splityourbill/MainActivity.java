@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     public  Button createGroupButton;
     public Button addTransButton;
-    public  Button resetAll;
+    public  Button resetAll, settleUp;
     ListView lv1;
 
     dataBaseHelper dataBaseHelper = new dataBaseHelper(MainActivity.this);
@@ -27,13 +27,25 @@ public class MainActivity extends AppCompatActivity {
         createGroupButton = findViewById(R.id.createGroupButton);
         addTransButton  = findViewById(R.id.addTransButton);
         resetAll = findViewById(R.id.resetButton);
+        settleUp = findViewById(R.id.splitButton);
         ShowPerson(dataBaseHelper);
         dataBaseHelper dbh = new dataBaseHelper(MainActivity.this);
         int numberOfPerson = dbh.getNumberOfPerson();
 
         if(numberOfPerson>0) {
             createGroupButton.setVisibility(View.GONE);
+            addTransButton.setVisibility(View.VISIBLE);
         }
+
+        settleUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v.getId()==R.id.splitButton) {
+                    Intent settleUpIntent = new Intent(MainActivity.this,SettleUp.class);
+                    startActivity(settleUpIntent);
+                }
+            }
+        });
 
         createGroupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 startActivity(getIntent());
             }
+
         });
 
         addTransButton.setOnClickListener(new View.OnClickListener() {

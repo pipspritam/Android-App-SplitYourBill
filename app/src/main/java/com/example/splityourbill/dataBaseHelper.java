@@ -14,7 +14,7 @@ import java.util.List;
 
 public class dataBaseHelper extends SQLiteOpenHelper
 {
-    public static int numberOfPerson=0;
+//    public static int numberOfPerson=0;
 
     public static final String personT = "PERSON";
     public static final String name = "NAME";
@@ -48,7 +48,7 @@ public class dataBaseHelper extends SQLiteOpenHelper
             return false;
         }
         else {
-            numberOfPerson++;
+//            numberOfPerson++;
             return true;
         }
 
@@ -77,13 +77,24 @@ public class dataBaseHelper extends SQLiteOpenHelper
         return returnList;
     }
 
-//    public int getNumberOfPerson() {
-//        String quarryString = "SELECT count(*) FROM "+ personT;
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery(quarryString, null);
-//        System.out.println(cursor);
-//
-//        return 0;
-//
-//    }
+    public int getNumberOfPerson() {
+        String quarryString = "SELECT * FROM "+ personT;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(quarryString, null);
+        int numberOfPerson = 0;
+
+        if (cursor.moveToFirst()) {
+            do {
+                numberOfPerson++;
+            }
+            while (cursor.moveToNext());
+        }
+        else {
+            cursor.close();
+            db.close();
+            return numberOfPerson;
+        }
+        return numberOfPerson;
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.example.splityourbill;
 
-import static com.example.splityourbill.dataBaseHelper.numberOfPerson;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +12,8 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public  static  Button createGroupButton;
+    public  Button createGroupButton;
+    public Button addTransButton;
     ListView lv1;
 
     dataBaseHelper dataBaseHelper = new dataBaseHelper(MainActivity.this);
@@ -24,7 +24,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         createGroupButton = findViewById(R.id.createGroupButton);
+        addTransButton  = findViewById(R.id.addTransButton);
         ShowPerson(dataBaseHelper);
+        dataBaseHelper dbh = new dataBaseHelper(MainActivity.this);
+        int numberOfPerson = dbh.getNumberOfPerson();
 
         if(numberOfPerson>0) {
             createGroupButton.setVisibility(View.GONE);
@@ -36,6 +39,16 @@ public class MainActivity extends AppCompatActivity {
                 if(v.getId()==R.id.createGroupButton) {
                     Intent createGroupIntent = new Intent(MainActivity.this,createGroupAddName.class);
                     startActivity(createGroupIntent);
+                }
+            }
+        });
+
+        addTransButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v.getId()==R.id.addTransButton) {
+                    Intent addTransIntent = new Intent(MainActivity.this,addTransDetails.class);
+                    startActivity(addTransIntent);
                 }
             }
         });

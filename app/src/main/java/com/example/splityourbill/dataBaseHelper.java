@@ -36,7 +36,7 @@ public class dataBaseHelper extends SQLiteOpenHelper
         String createTableStatementPerson = "CREATE TABLE " + personT + " ( "+ name + " STRING PRIMARY KEY, " + balance + " DOUBLE(10.2))";
         db.execSQL(createTableStatementPerson);
 
-        String createTableTransaction = "CREATE TABLE " + transactionT + " (" + payee + " STRING PRIMARY KEY, " + amount + " DOUBLE(10.2), " + description + " STRING, " + involved + " STRING)";
+        String createTableTransaction = "CREATE TABLE " + transactionT + " (" + payee + " STRING, " + amount + " DOUBLE(10.2), " + description + " STRING, " + involved + " STRING)";
         db.execSQL(createTableTransaction);
     }
 
@@ -152,5 +152,12 @@ public class dataBaseHelper extends SQLiteOpenHelper
     }
 
 
+    public void clearDatabase() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String clearDBQuery1 = "DELETE FROM "+ personT;
+        String clearDBQuery2 = "DELETE FROM "+ transactionT;
+        db.execSQL(clearDBQuery1);
+        db.execSQL(clearDBQuery2);
+    }
 
 }

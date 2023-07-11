@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     public  Button createGroupButton;
     public Button addTransButton;
+    public  Button resetAll;
     ListView lv1;
 
     dataBaseHelper dataBaseHelper = new dataBaseHelper(MainActivity.this);
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         createGroupButton = findViewById(R.id.createGroupButton);
         addTransButton  = findViewById(R.id.addTransButton);
+        resetAll = findViewById(R.id.resetButton);
         ShowPerson(dataBaseHelper);
         dataBaseHelper dbh = new dataBaseHelper(MainActivity.this);
         int numberOfPerson = dbh.getNumberOfPerson();
@@ -40,6 +42,15 @@ public class MainActivity extends AppCompatActivity {
                     Intent createGroupIntent = new Intent(MainActivity.this,createGroupAddName.class);
                     startActivity(createGroupIntent);
                 }
+            }
+        });
+
+        resetAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dataBaseHelper.clearDatabase();
+                finish();
+                startActivity(getIntent());
             }
         });
 

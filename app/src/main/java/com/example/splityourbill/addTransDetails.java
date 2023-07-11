@@ -2,13 +2,18 @@ package com.example.splityourbill;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SyncAdapterType;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 public class addTransDetails extends AppCompatActivity {
@@ -51,17 +56,28 @@ public class addTransDetails extends AppCompatActivity {
                     transactionModel = new TransactionModel("Invalid",0,"Invalid","Invalid");
 
                 }
+//                List<person> lp = dataBaseHelper.getEveryOne();
+
+                dataBaseHelper dataBaseHelper = new dataBaseHelper(addTransDetails.this);
                 double totalAmount = Double.parseDouble(amountEditText.getText().toString());
                 String payeeVar = payeeEditText.getText().toString();
                 String involvedPerson []= involvedEditText.getText().toString().split(" ");
+                String ip = Arrays.toString(involvedPerson);
                 int len = involvedPerson.length;
                 double avg = totalAmount/len;
+
                 for(String s: involvedPerson) {
-
+                    dataBaseHelper.updateBalance(s,avg*(-1));
+//                    System.out.println(s);
                 }
+                dataBaseHelper.updateBalance(payeeVar,totalAmount);
+//                int x = dataBaseHelper.getNumberOfPerson();
+//                System.out.println(payeeVar);
+//                System.out.println(totalAmount);
+//                System.out.println(len);
+//                System.out.println(avg);
 
 
-                dataBaseHelper dataBaseHelper = new dataBaseHelper(addTransDetails.this);
 
                 boolean success = dataBaseHelper.addOneTrans(transactionModel);
                 Toast.makeText(addTransDetails.this,"Success = "+success, Toast.LENGTH_SHORT).show();

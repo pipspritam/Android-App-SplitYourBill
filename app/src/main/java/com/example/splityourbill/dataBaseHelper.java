@@ -159,5 +159,19 @@ public class dataBaseHelper extends SQLiteOpenHelper
         db.execSQL(clearDBQuery1);
         db.execSQL(clearDBQuery2);
     }
+    public void updateBalance(String name, double val) {
+        SQLiteDatabase dbr = this.getReadableDatabase();
+        String original = "SELECT * FROM PERSON WHERE NAME = '"+name+"'";
+        Cursor cursor = dbr.rawQuery(original, null);
+        Double exBalance= 0.0;
+        if (cursor.moveToFirst()) {
+            exBalance = cursor.getDouble(1);
+        }
+        exBalance = exBalance + val;
+        dbr.close();
+        SQLiteDatabase db = this.getWritableDatabase();
+        String upBalance = "UPDATE PERSON SET BALANCE = "+exBalance+" WHERE NAME = '"+name+"'";
+        db.execSQL(upBalance);
+    }
 
 }

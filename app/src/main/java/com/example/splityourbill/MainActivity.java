@@ -31,10 +31,14 @@ public class MainActivity extends AppCompatActivity {
         ShowPerson(dataBaseHelper);
         dataBaseHelper dbh = new dataBaseHelper(MainActivity.this);
         int numberOfPerson = dbh.getNumberOfPerson();
+        int numberOfTrans = dbh.getNoOfTrans();
 
         if(numberOfPerson>0) {
             createGroupButton.setVisibility(View.GONE);
             addTransButton.setVisibility(View.VISIBLE);
+        }
+        if(numberOfTrans>0) {
+            settleUp.setVisibility(View.VISIBLE);
         }
 
         settleUp.setOnClickListener(new View.OnClickListener() {

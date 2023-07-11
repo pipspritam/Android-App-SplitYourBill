@@ -174,4 +174,24 @@ public class dataBaseHelper extends SQLiteOpenHelper
         db.execSQL(upBalance);
     }
 
+    public int getNoOfTrans() {
+        List<TransactionModel> returnList = new ArrayList<>();
+        String quarryString = "SELECT * FROM "+ transactionT;
+        SQLiteDatabase db2 = this.getReadableDatabase();
+        Cursor cursor = db2.rawQuery(quarryString, null);
+        int numberOfTrans = 0;
+        if (cursor.moveToFirst()) {
+            do {
+                numberOfTrans++;
+            }
+            while (cursor.moveToNext());
+        }
+        else {
+            cursor.close();
+            db2.close();
+            return numberOfTrans;
+        }
+        return numberOfTrans;
+    }
+
 }

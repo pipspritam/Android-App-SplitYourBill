@@ -22,15 +22,20 @@
          android:layout_marginRight="20sp"
          android:text="Payee"/>
 
-        <EditText
-            android:id="@+id/addPayeeName"
+<!--        <EditText-->
+<!--            android:id="@+id/addPayeeName"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="textCapWords"-->
+<!--            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"-->
+<!--            android:textSize="25sp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:hint="Enter Name"/>-->
+
+        <Spinner
+            android:id="@+id/payeeInput"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textCapWords"
-            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            android:textSize="25sp"
-            android:layout_marginBottom="10dp"
-            android:hint="Enter Name"/>
+            android:layout_height="wrap_content"/>
 
 
     </LinearLayout>

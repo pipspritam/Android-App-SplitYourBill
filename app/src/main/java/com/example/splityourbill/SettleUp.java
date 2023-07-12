@@ -17,9 +17,7 @@ public class SettleUp extends AppCompatActivity {
     ArrayAdapter settleUpArrayAdapter;
 
     public ListView lv;
-
     dataBaseHelper dataBaseHelper = new dataBaseHelper(SettleUp.this);
-
     public static void sortPeopleByBalance(List<person> people) {
         people.sort(Comparator.comparingDouble(p -> p.balance));
     }
@@ -29,24 +27,29 @@ public class SettleUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settle_up);
         lv = findViewById(R.id.settleUpListView);
-
         List<person> listOfPerson= dataBaseHelper.getEveryOne();
-
         int n = listOfPerson.size();
 //        System.out.println(n);
         List<String> results_list = new ArrayList<>();
-
+//        for(int i=0;i<n;i++) {
+//            if(listOfPerson.get(i).balance==0) {
+//                listOfPerson.remove(i);
+//            }
+//        }
         sortPeopleByBalance(listOfPerson);
         for(person element: listOfPerson) {
             System.out.println(element.name);
             System.out.println(element.balance);
         }
+
         while (n > 0) {
             n = listOfPerson.size();
             sortPeopleByBalance(listOfPerson);
             //if 1 and n-1 same
             if ((listOfPerson.get(0).balance + listOfPerson.get(n - 1).balance) == 0) {
-                results_list.add(listOfPerson.get(0).name+" pays "+ listOfPerson.get(n - 1).name+ " Rs "+ listOfPerson.get(n - 1).balance+"\n");
+                if(listOfPerson.get(0).balance!=0) {
+                    results_list.add(listOfPerson.get(0).name+" pays "+ listOfPerson.get(n - 1).name+ " Rs "+ listOfPerson.get(n - 1).balance+" \n");
+                }
                 listOfPerson.remove(0);
                 n = listOfPerson.size();
                 listOfPerson.remove(n-1);
@@ -63,13 +66,13 @@ public class SettleUp extends AppCompatActivity {
                 n = listOfPerson.size();
             }
         }
-
+        if(results_list.isEmpty()) {
+            results_list.add("Everything is settled up already");
+        }
         System.out.println(results_list);
 
         settleUpArrayAdapter = new ArrayAdapter<>(SettleUp.this, android.R.layout.simple_list_item_1, results_list);
         lv.setAdapter(settleUpArrayAdapter);
-
-
 
     }
 }

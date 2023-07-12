@@ -19,22 +19,15 @@
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:textSize="25sp"
-         android:layout_marginRight="20sp"
+         android:layout_marginEnd="20sp"
          android:text="Payee"/>
 
-<!--        <EditText-->
-<!--            android:id="@+id/addPayeeName"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:inputType="textCapWords"-->
-<!--            android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"-->
-<!--            android:textSize="25sp"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:hint="Enter Name"/>-->
+
 
         <Spinner
             android:id="@+id/payeeInput"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"/>
 
 
@@ -52,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
-            android:layout_marginRight="20sp"
+            android:layout_marginEnd="20sp"
             android:text="Amount"/>
 
         <EditText
@@ -62,7 +55,8 @@
             android:textSize="25sp"
             android:inputType="numberDecimal"
             android:layout_marginBottom="10dp"
-            android:hint="Enter Amount"/>
+            android:hint="Enter Amount"
+            android:autofillHints="$" />
 
 
     </LinearLayout>
@@ -99,10 +93,6 @@
         android:textSize="20sp"
         />
 
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center_horizontal">-->
 
 
         <ListView
@@ -116,9 +106,6 @@
             android:stretchMode="columnWidth"
             android:layout_marginBottom="50dp"
             android:verticalSpacing="3dp"/>
-
-
-<!--    </ScrollView>-->
 
 
 </LinearLayout>

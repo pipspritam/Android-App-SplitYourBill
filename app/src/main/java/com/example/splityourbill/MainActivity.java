@@ -30,17 +30,18 @@ public class MainActivity extends AppCompatActivity {
         resetAll = findViewById(R.id.resetButton);
         settleUp = findViewById(R.id.splitButton);
         ShowPerson(dataBaseHelper);
-        dataBaseHelper dbh = new dataBaseHelper(MainActivity.this);
-        int numberOfPerson = dbh.getNumberOfPerson();
-        int numberOfTrans = dbh.getNoOfTrans();
+        int numberOfPerson = dataBaseHelper.getEveryOne().size();
+        int numberOfTrans = dataBaseHelper.getEveryTrans().size();
 
         if (numberOfPerson > 0) {
             createGroupButton.setVisibility(View.GONE);
             addTransButton.setVisibility(View.VISIBLE);
+            resetAll.setVisibility(View.VISIBLE);
         }
         if (numberOfTrans > 0) {
             settleUp.setVisibility(View.VISIBLE);
         }
+
 
         settleUp.setOnClickListener(v -> {
             if (v.getId() == R.id.splitButton) {

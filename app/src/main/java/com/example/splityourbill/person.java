@@ -1,5 +1,7 @@
 package com.example.splityourbill;
 
+import androidx.annotation.NonNull;
+
 public class person {
     public String name;
     public double balance;
@@ -9,10 +11,10 @@ public class person {
         this.balance = balance;
     }
 
+    @NonNull
     @Override
     public String toString() {
-        return "Name = " + name + " -> " +
-                "Balance = " + balance;
+        return "Name = " + name + " -> " + "Balance = " + balance;
     }
 
     public String getName() {

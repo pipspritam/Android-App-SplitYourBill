@@ -1,5 +1,7 @@
 package com.example.splityourbill;
 
+import androidx.annotation.NonNull;
+
 public class TransactionModel {
     public String payee;
     public double amount;
@@ -13,15 +15,10 @@ public class TransactionModel {
         this.involve = involve;
     }
 
+    @NonNull
     @Override
     public String toString() {
-        return "Payee = " + payee  +
-                " | amount = " + amount +
-                " | description = " + description +
-                " | involve = " + involve;
-    }
-
-    public TransactionModel() {
+        return "Payee = " + payee + " | amount = " + amount + " | description = " + description + " | involve = " + involve;
     }
 
     public String getPayee() {

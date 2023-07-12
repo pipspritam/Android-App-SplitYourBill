@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">SplitYourBill</string>
+    <string name="amount">Amount</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="person_involved">Person Involved</string>
+    <string name="add_transaction">Add Transaction</string>
+    <string name="payee">Payee</string>
+    <string name="enter_description">Enter Description</string>
+    <string name="start_transaction">Start Transaction</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="add_person">Add Person</string>
+    <string name="split_your_bill">Split Your Bill</string>
+    <string name="create_group">Create Group</string>
+    <string name="settle_up">Settle Up</string>
+    <string name="reset">Reset</string>
+
 
 </resources>

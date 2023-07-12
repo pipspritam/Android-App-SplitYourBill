@@ -1,34 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".addTransDetails">
+
+    <TextView
+        android:id="@+id/addTransTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:text="@string/add_transaction"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10sp"
-        android:padding="5dp"
         android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
-     <TextView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:textSize="25sp"
-         android:layout_marginEnd="20sp"
-         android:text="Payee"/>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20sp"
+            android:text="@string/payee"
+            android:textSize="25sp" />
 
 
         <Spinner
             android:id="@+id/payeeInput"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-            android:layout_height="wrap_content"/>
+            android:minHeight="50dp" />
 
 
     </LinearLayout>
@@ -37,26 +48,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10sp"
-        android:padding="5dp"
         android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
             android:layout_marginEnd="20sp"
-            android:text="Amount"/>
+            android:text="@string/amount"
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/addPayeeAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:inputType="numberDecimal"
             android:layout_marginBottom="10dp"
-            android:hint="Enter Amount"
-            android:autofillHints="$" />
+            android:autofillHints="$"
+            android:hint="@string/enter_amount"
+            android:inputType="numberDecimal"
+            android:textSize="25sp" />
 
 
     </LinearLayout>
@@ -66,58 +77,46 @@
         android:id="@+id/addPayeeDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:padding="10dp"
         android:layout_marginBottom="10dp"
-        android:hint="Enter Description"/>
-
-    <EditText
-        android:id="@+id/addPersonInvolved"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:inputType="text"
+        android:hint="@string/enter_description"
         android:padding="10dp"
-        android:layout_marginBottom="10dp"
-        android:inputType="textCapWords"
-        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        android:hint="Add Involved Person"/>
+        android:textSize="25sp"
+        android:autofillHints="" />
 
-<!--    testing added -->
+
     <TextView
         android:id="@+id/textViewInvolved"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="25sp"
-        android:drawableRight="@android:drawable/arrow_down_float"
         android:drawablePadding="16dp"
-        android:hint="Person Involved"
-        android:padding="12dp" />
+        android:hint="@string/person_involved"
+        android:padding="12dp"
+        android:textSize="25sp"
+        app:drawableRightCompat="@android:drawable/arrow_down_float" />
 
     <Button
         android:id="@+id/addTransToDB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Transaction"
-        android:padding="20dp"
-        android:textStyle="bold"
         android:layout_marginBottom="20dp"
+        android:padding="20dp"
+        android:text="@string/add_transaction"
         android:textSize="20sp"
-        />
+        android:textStyle="bold" />
 
 
-
-        <ListView
-            android:id="@+id/transViewAddLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:dividerHeight="1dp"
-            android:horizontalSpacing="3dp"
-            android:scrollingCache="true"
-            android:smoothScrollbar="true"
-            android:stretchMode="columnWidth"
-            android:layout_marginBottom="50dp"
-            android:verticalSpacing="3dp"/>
+    <ListView
+        android:id="@+id/transViewAddLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:dividerHeight="1dp"
+        android:horizontalSpacing="3dp"
+        android:scrollingCache="true"
+        android:smoothScrollbar="true"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="3dp" />
 
 
 </LinearLayout>

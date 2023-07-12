@@ -2,6 +2,7 @@ package com.example.splityourbill;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ public class createGroupAddName extends AppCompatActivity {
 
     dataBaseHelper dataBaseHelper = new dataBaseHelper(createGroupAddName.this);
     ArrayAdapter personArrayAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,32 +30,37 @@ public class createGroupAddName extends AppCompatActivity {
         lv = findViewById(R.id.listViewAddLayout);
         startTrans = findViewById(R.id.startTrans);
 
+
         ShowPerson(dataBaseHelper);
+
+
+
 
 
         addButton.setOnClickListener(v -> {
             person person;
             String nameinputCheck = nameEditText.getText().toString();
-            nameinputCheck.trim();
-            if(nameinputCheck.isEmpty()) {
-                Toast.makeText(createGroupAddName.this,"Enter a valid name", Toast.LENGTH_SHORT).show();
+            nameinputCheck = nameinputCheck.trim();
+            if (nameinputCheck.isEmpty()) {
+                Toast.makeText(createGroupAddName.this, "Enter a valid name", Toast.LENGTH_SHORT).show();
                 nameEditText.setText(null);
-            }
-            else {
-                    person = new person (nameEditText.getText().toString(), 0);
+            } else {
+                person = new person(nameEditText.getText().toString(), 0);
                 dataBaseHelper dataBaseHelper = new dataBaseHelper(createGroupAddName.this);
-                boolean success = dataBaseHelper.addOne(person);
+                dataBaseHelper.addOne(person);
                 ShowPerson(dataBaseHelper);
-                Toast.makeText(createGroupAddName.this,"Name Added", Toast.LENGTH_SHORT).show();
+                Toast.makeText(createGroupAddName.this, "Name Added", Toast.LENGTH_SHORT).show();
                 nameEditText.setText(null);
+                if(dataBaseHelper.getEveryOne().size()>=2) {
+                    startTrans.setVisibility(View.VISIBLE);
+                }
             }
 
 
         });
 
         startTrans.setOnClickListener(v -> {
-//                MainActivity.createGroupButton.setVisibility(View.GONE);
-            Intent mainIntent = new Intent(createGroupAddName.this,MainActivity.class);
+            Intent mainIntent = new Intent(createGroupAddName.this, addTransDetails.class);
             startActivity(mainIntent);
         });
     }

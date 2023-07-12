@@ -1,15 +1,14 @@
 package com.example.splityourbill;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class createGroupAddName extends AppCompatActivity {
 
@@ -32,41 +31,35 @@ public class createGroupAddName extends AppCompatActivity {
         ShowPerson(dataBaseHelper);
 
 
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                person person;
-                try {
-                    person = new person (nameEditText.getText().toString(), 0);
-                }
-                catch (Exception e) {
-                    Toast.makeText(createGroupAddName.this, "Error", Toast.LENGTH_SHORT).show();
-                    person = new person("Invalid User",0);
-                }
-
-                dataBaseHelper dataBaseHelper = new dataBaseHelper(createGroupAddName.this);
-
-                boolean success = dataBaseHelper.addOne(person);
-
-                ShowPerson(dataBaseHelper);
-
-                Toast.makeText(createGroupAddName.this,"Success = "+success, Toast.LENGTH_SHORT).show();
+        addButton.setOnClickListener(v -> {
+            person person;
+            String nameinputCheck = nameEditText.getText().toString();
+            nameinputCheck.trim();
+            if(nameinputCheck.isEmpty()) {
+                Toast.makeText(createGroupAddName.this,"Enter a valid name", Toast.LENGTH_SHORT).show();
                 nameEditText.setText(null);
             }
+            else {
+                    person = new person (nameEditText.getText().toString(), 0);
+                dataBaseHelper dataBaseHelper = new dataBaseHelper(createGroupAddName.this);
+                boolean success = dataBaseHelper.addOne(person);
+                ShowPerson(dataBaseHelper);
+                Toast.makeText(createGroupAddName.this,"Name Added", Toast.LENGTH_SHORT).show();
+                nameEditText.setText(null);
+            }
+
+
         });
 
-        startTrans.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        startTrans.setOnClickListener(v -> {
 //                MainActivity.createGroupButton.setVisibility(View.GONE);
-                Intent mainIntent = new Intent(createGroupAddName.this,MainActivity.class);
-                startActivity(mainIntent);
-            }
+            Intent mainIntent = new Intent(createGroupAddName.this,MainActivity.class);
+            startActivity(mainIntent);
         });
     }
 
     private void ShowPerson(dataBaseHelper dataBaseHelper) {
-        personArrayAdapter = new ArrayAdapter<person>(createGroupAddName.this, android.R.layout.simple_list_item_1, dataBaseHelper.getEveryOne());
+        personArrayAdapter = new ArrayAdapter<>(createGroupAddName.this, android.R.layout.simple_list_item_1, dataBaseHelper.getEveryOne());
         lv.setAdapter(personArrayAdapter);
     }
 }

@@ -28,10 +28,6 @@ public class SettleUp extends AppCompatActivity {
         int n = listOfPerson.size();
         List<String> results_list = new ArrayList<>();
         sortPeopleByBalance(listOfPerson);
-        for (person element : listOfPerson) {
-            System.out.println(element.name);
-            System.out.println(element.balance);
-        }
 
         while (n > 1) {
             n = listOfPerson.size();

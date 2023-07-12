@@ -1,16 +1,21 @@
 package com.example.splityourbill;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -42,10 +47,85 @@ public class addTransDetails extends AppCompatActivity {
         return names;
     }
 
+    //testing multiple dropdown
+    TextView textView;
+    boolean[] selectedPerson;
+    ArrayList<Integer> langList = new ArrayList<>();
+    String[] langArray = {"Arya", "Pritam"};
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_trans_details);
+
+
+
+        //testing multiple dropdown
+        textView = findViewById(R.id.textViewInvolved);
+        selectedPerson = new boolean[langArray.length];
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(addTransDetails.this);
+                builder.setTitle("Select Involved Person");
+                builder.setCancelable(false);
+                builder.setMultiChoiceItems(langArray, selectedPerson, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                        if (isChecked) {
+                            langList.add(which);
+                            Collections.sort(langList);
+                        } else {
+                            langList.remove(Integer.valueOf(which));
+                        }
+                    }
+                });
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (int j = 0; j < langList.size(); j++) {
+                            stringBuilder.append(langArray[langList.get(j)]);
+                            // check condition
+                            if (j != langList.size() - 1) {
+                                stringBuilder.append(" ");
+                            }
+                        }
+                        textView.setText(stringBuilder.toString());
+                    }
+
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+//
+                builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        for (int j = 0; j < selectedPerson.length; j++) {
+
+                            selectedPerson[j] = false;
+                            langList.clear();
+                            textView.setText("");
+                        }
+
+                    }
+                });
+
+                builder.show();
+
+            }
+        });
+
+
+
+
 
         amountEditText = findViewById(R.id.addPayeeAmount);
         descEditText = findViewById(R.id.addPayeeDesc);
@@ -66,7 +146,7 @@ public class addTransDetails extends AppCompatActivity {
         addTransDB.setOnClickListener(v -> {
             TransactionModel transactionModel;
             try {
-                transactionModel = new TransactionModel(sp.getSelectedItem().toString(), Double.parseDouble(amountEditText.getText().toString()), descEditText.getText().toString(), involvedEditText.getText().toString());
+                transactionModel = new TransactionModel(sp.getSelectedItem().toString(), Double.parseDouble(amountEditText.getText().toString()), descEditText.getText().toString(), textView.getText().toString());
             }
             catch (Exception e) {
                 Toast.makeText(addTransDetails.this, "Error", Toast.LENGTH_SHORT).show();
@@ -77,7 +157,8 @@ public class addTransDetails extends AppCompatActivity {
             dataBaseHelper dataBaseHelper = new dataBaseHelper(addTransDetails.this);
             double totalAmount = Double.parseDouble(amountEditText.getText().toString());
             String payeeVar = sp.getSelectedItem().toString();
-            String[] involvedPerson = involvedEditText.getText().toString().split(" ");
+            String[] involvedPerson = textView.getText().toString().split(" ");
+            System.out.println(involvedPerson);
             int len = involvedPerson.length;
             double avg = totalAmount/len;
 

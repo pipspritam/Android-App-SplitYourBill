@@ -2,7 +2,6 @@ package com.example.splityourbill;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -31,13 +30,10 @@ public class SettleUp extends AppCompatActivity {
         goToHomeButton = findViewById(R.id.goHome);
 
 
-        goToHomeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (v.getId() == R.id.goHome) {
-                    Intent homeIntent = new Intent(SettleUp.this, MainActivity.class);
-                    startActivity(homeIntent);
-                }
+        goToHomeButton.setOnClickListener(v -> {
+            if (v.getId() == R.id.goHome) {
+                Intent homeIntent = new Intent(SettleUp.this, MainActivity.class);
+                startActivity(homeIntent);
             }
         });
         List<person> listOfPerson = dataBaseHelper.getEveryOne();

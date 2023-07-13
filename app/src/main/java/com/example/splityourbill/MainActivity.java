@@ -60,13 +60,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        createGroupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (v.getId() == R.id.createGroupButton) {
-                    Intent createGroupIntent = new Intent(MainActivity.this, createGroupAddName.class);
-                    startActivity(createGroupIntent);
-                }
+        createGroupButton.setOnClickListener(v -> {
+            if (v.getId() == R.id.createGroupButton) {
+                Intent createGroupIntent = new Intent(MainActivity.this, createGroupAddName.class);
+                startActivity(createGroupIntent);
             }
         });
 

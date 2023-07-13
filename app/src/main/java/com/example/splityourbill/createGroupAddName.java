@@ -30,11 +30,7 @@ public class createGroupAddName extends AppCompatActivity {
         lv = findViewById(R.id.listViewAddLayout);
         startTrans = findViewById(R.id.startTrans);
 
-
         ShowPerson(dataBaseHelper);
-
-
-
 
 
         addButton.setOnClickListener(v -> {
@@ -51,7 +47,7 @@ public class createGroupAddName extends AppCompatActivity {
                 ShowPerson(dataBaseHelper);
                 Toast.makeText(createGroupAddName.this, "Name Added", Toast.LENGTH_SHORT).show();
                 nameEditText.setText(null);
-                if(dataBaseHelper.getEveryOne().size()>=2) {
+                if (dataBaseHelper.getEveryOne().size() >= 2) {
                     startTrans.setVisibility(View.VISIBLE);
                 }
             }

@@ -2,7 +2,6 @@ package com.example.splityourbill;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,14 +55,10 @@ public class addTransDetails extends AppCompatActivity {
 
         goToHomeButton = findViewById(R.id.goToHomeButton);
 
-        goToHomeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent homeIntent = new Intent(addTransDetails.this, MainActivity.class);
-                startActivity(homeIntent);
-            }
+        goToHomeButton.setOnClickListener(v -> {
+            Intent homeIntent = new Intent(addTransDetails.this, MainActivity.class);
+            startActivity(homeIntent);
         });
-
 
 
         textViewInvolvedPeople = findViewById(R.id.textViewInvolved);
@@ -98,15 +93,9 @@ public class addTransDetails extends AppCompatActivity {
 
         });
 
-
         amountEditText = findViewById(R.id.addPayeeAmount);
         descEditText = findViewById(R.id.addPayeeDesc);
         lv = findViewById(R.id.transViewAddLayout);
-
-
-
-
-
 
         addTransDB = findViewById(R.id.addTransToDB);
 

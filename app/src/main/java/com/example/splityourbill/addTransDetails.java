@@ -2,6 +2,7 @@ package com.example.splityourbill;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +23,7 @@ public class addTransDetails extends AppCompatActivity {
 
     EditText amountEditText, descEditText;
     ListView lv;
-    Button addTransDB;
+    Button addTransDB, goToHomeButton;
     dataBaseHelper dataBaseHelper = new dataBaseHelper(addTransDetails.this);
     ArrayAdapter transactionArrayAdapter;
     Spinner sp;
@@ -52,6 +53,18 @@ public class addTransDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_trans_details);
+
+        goToHomeButton = findViewById(R.id.goToHomeButton);
+
+        goToHomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homeIntent = new Intent(addTransDetails.this, MainActivity.class);
+                startActivity(homeIntent);
+            }
+        });
+
+
 
         textViewInvolvedPeople = findViewById(R.id.textViewInvolved);
         selectedPerson = new boolean[getNameList().length];
@@ -90,6 +103,11 @@ public class addTransDetails extends AppCompatActivity {
         descEditText = findViewById(R.id.addPayeeDesc);
         lv = findViewById(R.id.transViewAddLayout);
 
+
+
+
+
+
         addTransDB = findViewById(R.id.addTransToDB);
 
         sp = findViewById(R.id.payeeInput);
@@ -111,7 +129,7 @@ public class addTransDetails extends AppCompatActivity {
             dataBaseHelper dataBaseHelper = new dataBaseHelper(addTransDetails.this);
             double totalAmount = Double.parseDouble(amountEditText.getText().toString());
             String payeeVar = sp.getSelectedItem().toString();
-            String[] involvedPerson = textViewInvolvedPeople.getText().toString().split(" ");
+            String[] involvedPerson = textViewInvolvedPeople.getText().toString().split(",");
             int len = involvedPerson.length;
             double avg = totalAmount / len;
 
@@ -150,7 +168,7 @@ public class addTransDetails extends AppCompatActivity {
         for (int j = 0; j < langList.size(); j++) {
             stringBuilder.append(getNameList()[langList.get(j)]);
             if (j != langList.size() - 1) {
-                stringBuilder.append(" ");
+                stringBuilder.append(",");
             }
         }
         textViewInvolvedPeople.setText(stringBuilder.toString());

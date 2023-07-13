@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     public Button createGroupButton;
-    public Button addTransButton;
+    public Button addTransButton, showTransButton;
     public Button resetAll, settleUp;
     ListView lv1;
 
@@ -29,6 +29,15 @@ public class MainActivity extends AppCompatActivity {
         addTransButton = findViewById(R.id.addTransButton);
         resetAll = findViewById(R.id.resetButton);
         settleUp = findViewById(R.id.splitButton);
+        showTransButton = findViewById(R.id.showTransButton);
+
+        showTransButton.setOnClickListener(v -> {
+            if (v.getId() == R.id.showTransButton) {
+                Intent showTransIntent = new Intent(MainActivity.this, ViewTransaction.class);
+                startActivity(showTransIntent);
+            }
+        });
+
         ShowPerson(dataBaseHelper);
         int numberOfPerson = dataBaseHelper.getEveryOne().size();
         int numberOfTrans = dataBaseHelper.getEveryTrans().size();
@@ -40,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (numberOfTrans > 0) {
             settleUp.setVisibility(View.VISIBLE);
+            showTransButton.setVisibility(View.VISIBLE);
         }
 
 

@@ -80,24 +80,6 @@ public class dataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-//    public int getNumberOfPerson() {
-//        String quarryString = "SELECT * FROM " + personT;
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery(quarryString, null);
-//        int numberOfPerson = 0;
-//
-//        if (cursor.moveToFirst()) {
-//            do {
-//                numberOfPerson++;
-//            }
-//            while (cursor.moveToNext());
-//        } else {
-//            cursor.close();
-//            db.close();
-//            return numberOfPerson;
-//        }
-//        return numberOfPerson;
-//    }
 
     public boolean addOneTrans(TransactionModel transactionModel) {
         SQLiteDatabase db1 = this.getWritableDatabase();
@@ -162,22 +144,5 @@ public class dataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(upBalance);
     }
 
-//    public int getNoOfTrans() {
-//        String quarryString = "SELECT * FROM " + transactionT;
-//        SQLiteDatabase db2 = this.getReadableDatabase();
-//        Cursor cursor = db2.rawQuery(quarryString, null);
-//        int numberOfTrans = 0;
-//        if (cursor.moveToFirst()) {
-//            do {
-//                numberOfTrans++;
-//            }
-//            while (cursor.moveToNext());
-//        } else {
-//            cursor.close();
-//            db2.close();
-//            return numberOfTrans;
-//        }
-//        return numberOfTrans;
-//    }
 
 }

@@ -5,5 +5,5 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.SplitYourBill" parent="Base.Theme.SplitYourBill" />
+    <style name="Theme.SplitYourBill" parent="Theme.MaterialComponents.Light.NoActionBar" />
 </resources>

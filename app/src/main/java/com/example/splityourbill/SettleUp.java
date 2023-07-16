@@ -67,7 +67,7 @@ public class SettleUp extends AppCompatActivity {
         if (results_list.isEmpty()) {
             results_list.add("Everything is settled up already");
         }
-        System.out.println(results_list);
+
 
         settleUpArrayAdapter = new ArrayAdapter<>(SettleUp.this, android.R.layout.simple_list_item_1, results_list);
         lv.setAdapter(settleUpArrayAdapter);

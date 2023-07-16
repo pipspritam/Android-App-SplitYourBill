@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     public Button addTransButton, showTransButton;
     public Button resetAll, settleUp;
     ListView lv1;
+    ImageView i1;
+    TextView t1,t2,t3,t4;
 
     dataBaseHelper dataBaseHelper = new dataBaseHelper(MainActivity.this);
     ArrayAdapter personArrayAdapter;
@@ -30,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
         resetAll = findViewById(R.id.resetButton);
         settleUp = findViewById(R.id.splitButton);
         showTransButton = findViewById(R.id.showTransButton);
+        i1 = findViewById(R.id.i1);
+        t1 = findViewById(R.id.t1);
+        t2 = findViewById(R.id.t2);
+        t3 = findViewById(R.id.t3);
+        t4 = findViewById(R.id.t4);
+
 
         showTransButton.setOnClickListener(v -> {
             if (v.getId() == R.id.showTransButton) {
@@ -46,6 +56,12 @@ public class MainActivity extends AppCompatActivity {
             createGroupButton.setVisibility(View.GONE);
             addTransButton.setVisibility(View.VISIBLE);
             resetAll.setVisibility(View.VISIBLE);
+            i1.setVisibility(View.GONE);
+            t1.setVisibility(View.GONE);
+            t2.setVisibility(View.GONE);
+            t3.setVisibility(View.GONE);
+            t4.setVisibility(View.GONE);
+            lv1.setVisibility(View.VISIBLE);
         }
         if (numberOfTrans > 0) {
             settleUp.setVisibility(View.VISIBLE);

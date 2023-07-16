@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 public class ViewTransaction extends AppCompatActivity {
 
     ListView lv1;
     Button goToHomeButton;
+    ImageButton goToBackButton;
     ArrayAdapter transactionArrayAdapter;
 
 
@@ -21,6 +23,15 @@ public class ViewTransaction extends AppCompatActivity {
         setContentView(R.layout.activity_view_transaction);
 
         goToHomeButton = findViewById(R.id.goToHomeButton);
+        goToBackButton = findViewById(R.id.goToBackButton);
+
+
+        goToBackButton.setOnClickListener(v -> {
+            if (v.getId() == R.id.goToBackButton) {
+                Intent backIntent = new Intent(ViewTransaction.this, MainActivity.class);
+                startActivity(backIntent);
+            }
+        });
 
 
         goToHomeButton.setOnClickListener(v -> {

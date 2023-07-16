@@ -15,6 +15,7 @@ public class ViewTransaction extends AppCompatActivity {
     Button goToHomeButton;
     ImageButton goToBackButton;
     ArrayAdapter transactionArrayAdapter;
+    Button settleUpButton, addTransButton;
 
 
     @Override
@@ -24,6 +25,24 @@ public class ViewTransaction extends AppCompatActivity {
 
         goToHomeButton = findViewById(R.id.goToHomeButton);
         goToBackButton = findViewById(R.id.goToBackButton);
+        settleUpButton = findViewById(R.id.goToSettleUp);
+        addTransButton = findViewById(R.id.goToaddTrans);
+
+
+        settleUpButton.setOnClickListener(v -> {
+            if (v.getId() == R.id.goToSettleUp) {
+                Intent backIntent = new Intent(ViewTransaction.this, SettleUp.class);
+                startActivity(backIntent);
+            }
+
+        });
+
+        addTransButton.setOnClickListener(v -> {
+            if (v.getId() == R.id.goToaddTrans) {
+                Intent backIntent = new Intent(ViewTransaction.this, addTransDetails.class);
+                startActivity(backIntent);
+            }
+        });
 
 
         goToBackButton.setOnClickListener(v -> {
@@ -44,8 +63,14 @@ public class ViewTransaction extends AppCompatActivity {
 
         lv1 = findViewById(R.id.lv1);
         dataBaseHelper dataBaseHelper = new dataBaseHelper(ViewTransaction.this);
-        transactionArrayAdapter = new ArrayAdapter<>(ViewTransaction.this, android.R.layout.simple_list_item_1, dataBaseHelper.getEveryTrans());
-        lv1.setAdapter(transactionArrayAdapter);
+//        transactionArrayAdapter = new ArrayAdapter<>(ViewTransaction.this, android.R.layout.simple_list_item_1, dataBaseHelper.getEveryTrans());
+//        lv1.setAdapter(transactionArrayAdapter);
+
+        customBaseAdapter customBaseAdapter = new customBaseAdapter(getApplicationContext(), dataBaseHelper.getEveryTrans());
+        lv1.setAdapter(customBaseAdapter);
+
+
+
     }
 }
 

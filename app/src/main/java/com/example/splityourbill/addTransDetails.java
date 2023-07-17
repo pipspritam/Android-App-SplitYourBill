@@ -128,11 +128,12 @@ public class addTransDetails extends AppCompatActivity {
             dataBaseHelper.updateBalance(payeeVar, totalAmount);
 
 
-            boolean success = dataBaseHelper.addOneTrans(transactionModel);
-            Toast.makeText(addTransDetails.this, "Success = " + success, Toast.LENGTH_SHORT).show();
+            dataBaseHelper.addOneTrans(transactionModel);
+            Toast.makeText(addTransDetails.this, "Transaction Added", Toast.LENGTH_SHORT).show();
             amountEditText.setText(null);
             descEditText.setText(null);
             textViewInvolvedPeople.setText("");
+
             ShowTrans(dataBaseHelper);
 
         });

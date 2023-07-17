@@ -63,9 +63,6 @@ public class ViewTransaction extends AppCompatActivity {
 
         lv1 = findViewById(R.id.lv1);
         dataBaseHelper dataBaseHelper = new dataBaseHelper(ViewTransaction.this);
-//        transactionArrayAdapter = new ArrayAdapter<>(ViewTransaction.this, android.R.layout.simple_list_item_1, dataBaseHelper.getEveryTrans());
-//        lv1.setAdapter(transactionArrayAdapter);
-
         customBaseAdapter customBaseAdapter = new customBaseAdapter(getApplicationContext(), dataBaseHelper.getEveryTrans());
         lv1.setAdapter(customBaseAdapter);
 

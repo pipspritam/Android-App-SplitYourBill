@@ -3,18 +3,22 @@ package com.example.splityourbill;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     public Button createGroupButton;
+    LinearLayout layout;
     public Button addTransButton, showTransButton;
     public Button resetAll, settleUp;
     ListView lv1;
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         t2 = findViewById(R.id.t2);
         t3 = findViewById(R.id.t3);
         t4 = findViewById(R.id.t4);
+        layout = findViewById(R.id.linearlayout);
 
 
         showTransButton.setOnClickListener(v -> {
@@ -62,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             t3.setVisibility(View.GONE);
             t4.setVisibility(View.GONE);
             lv1.setVisibility(View.VISIBLE);
+
         }
         if (numberOfTrans > 0) {
             settleUp.setVisibility(View.VISIBLE);
@@ -83,11 +89,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
         resetAll.setOnClickListener(v -> {
-            dataBaseHelper.clearDatabase();
-            finish();
-            startActivity(getIntent());
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Confirmation")
+                    .setMessage("Are you sure you want to reset?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        dataBaseHelper.clearDatabase();
+                        finish();
+                        startActivity(getIntent());
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // Do nothing or handle the cancel action
+                    })
+                    .show();
         });
+
+
 
         addTransButton.setOnClickListener(v -> {
             if (v.getId() == R.id.addTransButton) {

@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         t3 = findViewById(R.id.t3);
         t4 = findViewById(R.id.t4);
         layout = findViewById(R.id.linearlayout);
+        lv1 = findViewById(R.id.lv1);
 
 
         showTransButton.setOnClickListener(v -> {
@@ -136,9 +137,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void ShowPerson(dataBaseHelper dataBaseHelper) {
-        lv1 = findViewById(R.id.listView);
-        personArrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.getEveryOne());
-        lv1.setAdapter(personArrayAdapter);
+        lv1 = findViewById(R.id.lv1);
+//        personArrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.getEveryOne());
+//        lv1.setAdapter(personArrayAdapter);
+
+
+        customNameBaseAdapter customNameBaseAdapter = new customNameBaseAdapter(getApplicationContext(), dataBaseHelper.getEveryOne());
+        lv1.setAdapter(customNameBaseAdapter);
     }
 
     public void onRestart() {

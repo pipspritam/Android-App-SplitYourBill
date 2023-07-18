@@ -77,33 +77,53 @@
     </LinearLayout>
 
 
+    <Button
+        android:id="@+id/createGroupButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:padding="20dp"
+        android:text="@string/create_group"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 
-<!--    <TextView-->
-<!--        android:id="@+id/textViewTop"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_marginBottom="20dp"-->
-<!--        android:layout_weight="1"-->
-<!--        android:gravity="center"-->
-<!--        android:text="@string/split_your_bill"-->
-<!--        android:textSize="25sp"-->
-<!--        android:textStyle="bold" />-->
-
-<!--    <ListView-->
-<!--        android:id="@+id/listView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="50dp"-->
-<!--        android:dividerHeight="1dp"-->
-<!--        android:horizontalSpacing="3dp"-->
-<!--        android:scrollingCache="true"-->
-<!--        android:smoothScrollbar="true"-->
-<!--        android:stretchMode="columnWidth"-->
-<!--        android:verticalSpacing="3dp"-->
 
 
-<!--        />-->
+
+
+
+    <TextView
+        android:id="@+id/textViewTopName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="2dp"
+        android:text="@string/easy_split"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+
+    <TextView
+        android:id="@+id/textViewTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
+        android:text="Split Your Bill"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        tools:ignore="RtlHardcoded" />
+
 
     <ListView
         android:id="@+id/listView"
@@ -121,37 +141,8 @@
         />
 
 
-    <Button
-        android:id="@+id/createGroupButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:padding="20dp"
-        android:text="@string/create_group"
-        android:textSize="20sp"
-        android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/addTransButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:padding="20dp"
-        android:text="@string/add_transaction"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:visibility="gone" />
 
-    <Button
-        android:id="@+id/showTransButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:padding="20dp"
-        android:text="@string/view_transactions"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:visibility="gone" />
 
     <Button
         android:id="@+id/splitButton"
@@ -165,16 +156,65 @@
         android:visibility="gone" />
 
 
-    <Button
-        android:id="@+id/resetButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:padding="20dp"
-        android:visibility="gone"
-        android:text="@string/reset"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/showTransButton"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/paid"
+            android:padding="5dp"
+            android:layout_gravity="bottom"
+            android:text="View Transaction"
+            android:textColor="@color/black"
+            android:visibility="gone"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/addTransButton"
+            android:drawableTop="@drawable/plus1"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:padding="5dp"
+            android:layout_gravity="bottom"
+            android:text="Add Transaction"
+            android:textColor="@color/black"
+            android:visibility="gone"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/resetButton"
+            android:drawableTop="@drawable/reset"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:padding="5dp"
+            android:visibility="gone"
+            android:layout_gravity="bottom"
+            android:text="Reset"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:textStyle="bold"
+
+            />
+
+    </LinearLayout>
 
 
 </LinearLayout>

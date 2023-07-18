@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     ListView lv1;
     ImageView i1;
     TextView t1,t2,t3,t4;
+    TextView top, topName;
 
     dataBaseHelper dataBaseHelper = new dataBaseHelper(MainActivity.this);
     ArrayAdapter personArrayAdapter;
@@ -32,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        top = findViewById(R.id.textViewTop);
+        topName = findViewById(R.id.textViewTopName);
 
         createGroupButton = findViewById(R.id.createGroupButton);
         addTransButton = findViewById(R.id.addTransButton);
@@ -67,11 +73,22 @@ public class MainActivity extends AppCompatActivity {
             t3.setVisibility(View.GONE);
             t4.setVisibility(View.GONE);
             lv1.setVisibility(View.VISIBLE);
+            top.setVisibility(View.VISIBLE);
+            topName.setVisibility(View.VISIBLE);
+
+            layout.setBackground(ContextCompat.getDrawable(this, R.drawable.background));
+
+
+            settleUp.setVisibility(View.VISIBLE);
+            settleUp.setEnabled(false);
+            showTransButton.setVisibility(View.VISIBLE);
+            showTransButton.setEnabled(false);
 
         }
         if (numberOfTrans > 0) {
-            settleUp.setVisibility(View.VISIBLE);
-            showTransButton.setVisibility(View.VISIBLE);
+            settleUp.setEnabled(true);
+
+            showTransButton.setEnabled(true);
         }
 
 

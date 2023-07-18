@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/linearlayout"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -125,22 +126,37 @@
         tools:ignore="RtlHardcoded" />
 
 
-    <ListView
-        android:id="@+id/listView"
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view_inner"
+
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:layout_marginBottom="50dp"
-        android:dividerHeight="1dp"
-        android:horizontalSpacing="3dp"
-        android:scrollingCache="true"
-        android:smoothScrollbar="true"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="3dp"
-        android:visibility="gone"
-        />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/white"
+        card_view:cardElevation="0dp"
+
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardCornerRadius="10dp">
+
+        <ListView
+            android:id="@+id/lv1"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:padding="5dp"
+            android:background="@color/white"
+            android:scrollbars="none"
+            android:divider="@color/transparent"
+            android:visibility="gone"
+
+            />
 
 
+    </com.google.android.material.card.MaterialCardView>
 
 
 

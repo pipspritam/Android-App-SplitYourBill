@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearlayout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/white"
     android:padding="5dp"
     tools:context=".MainActivity">
 
@@ -20,47 +20,48 @@
 
         <ImageView
             android:id="@+id/i1"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
+            android:layout_width="300dp"
+            android:layout_height="250dp"
             android:src="@drawable/front"
-            />
-
+            android:contentDescription="@string/just_a_icon" />
 
 
         <TextView
             android:id="@+id/t1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nameOfApp"
             android:layout_gravity="center_horizontal"
-            android:textColor="#9340E6"
-            android:textStyle="bold"
             android:padding="5dp"
-            android:textSize="30dp"
+            android:text="@string/nameOfApp"
+            android:textColor="#9340E6"
+            android:textSize="30sp"
+            android:textStyle="bold"
 
             />
+
         <TextView
             android:id="@+id/t2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Simplifying Shared"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/black"
-            android:textStyle="bold"
             android:padding="5dp"
-            android:textSize="30dp"
+            android:text="@string/simplifying_shared"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"
 
             />
+
         <TextView
             android:id="@+id/t3"
             android:layout_width="wrap_content"
-            android:padding="5dp"
             android:layout_height="wrap_content"
-            android:text="Expenses With Ease!"
             android:layout_gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="@string/expenses_with_ease"
             android:textColor="@color/black"
+            android:textSize="30sp"
             android:textStyle="bold"
-            android:textSize="30dp"
 
             />
 
@@ -68,30 +69,25 @@
             android:id="@+id/t4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/black"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:textAlignment="center"
             android:layout_marginBottom="60dp"
-            android:text="@string/intro"/>
+            android:text="@string/intro"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+
+        <Button
+            android:id="@+id/createGroupButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:padding="20dp"
+            android:text="@string/create_group"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
-
-
-    <Button
-        android:id="@+id/createGroupButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:padding="20dp"
-        android:text="@string/create_group"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-
-
-
-
 
 
     <TextView
@@ -104,10 +100,10 @@
         android:layout_marginBottom="2dp"
         android:text="@string/easy_split"
         android:textColor="@color/white"
-        android:visibility="gone"
         android:textSize="20sp"
         android:textStyle="bold"
-        />
+        android:visibility="gone"
+        tools:ignore="RtlHardcoded" />
 
 
     <TextView
@@ -118,14 +114,12 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="20dp"
-        android:text="Split Your Bill"
-        android:visibility="gone"
+        android:text="@string/split_your_bill"
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:visibility="gone"
         tools:ignore="RtlHardcoded" />
-
-
 
 
     <com.google.android.material.card.MaterialCardView
@@ -138,26 +132,25 @@
         android:layout_marginRight="30dp"
         android:layout_marginBottom="20dp"
         android:background="@color/white"
-        card_view:cardElevation="0dp"
-
         card_view:cardBackgroundColor="@color/white"
-        card_view:cardCornerRadius="10dp">
+
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="0dp">
 
         <ListView
             android:id="@+id/lv1"
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:padding="5dp"
             android:background="@color/white"
-            android:scrollbars="none"
             android:divider="@color/transparent"
+            android:padding="5dp"
+            android:scrollbars="none"
             android:visibility="gone"
 
             />
 
 
     </com.google.android.material.card.MaterialCardView>
-
 
 
     <Button
@@ -172,7 +165,6 @@
         android:visibility="gone" />
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
@@ -184,49 +176,50 @@
             android:id="@+id/showTransButton"
             android:layout_width="0dp"
             android:layout_height="80dp"
+            android:layout_gravity="bottom"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:background="@color/transparent"
             android:drawableTop="@drawable/paid"
             android:padding="5dp"
-            android:layout_gravity="bottom"
-            android:text="View Transaction"
-            android:textColor="@color/black"
-            android:visibility="gone"
-            android:textSize="10sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/addTransButton"
-            android:drawableTop="@drawable/plus1"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:padding="5dp"
-            android:layout_gravity="bottom"
-            android:text="Add Transaction"
-            android:textColor="@color/black"
-            android:visibility="gone"
-            android:textSize="10sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/resetButton"
-            android:drawableTop="@drawable/reset"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:padding="5dp"
-            android:visibility="gone"
-            android:layout_gravity="bottom"
-            android:text="Reset"
+            android:text="@string/view_transaction"
             android:textColor="@color/black"
             android:textSize="10sp"
             android:textStyle="bold"
+            android:visibility="gone"
+            tools:ignore="SmallSp" />
+
+        <Button
+            android:id="@+id/addTransButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/plus1"
+            android:padding="5dp"
+            android:text="@string/add_transaction"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:drawableTop="@drawable/reset"
+            android:padding="5dp"
+            android:text="@string/reset"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:visibility="gone"
 
             />
 

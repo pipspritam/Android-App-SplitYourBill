@@ -17,9 +17,13 @@
     <string name="view_transactions">View Transactions</string>
     <string name="transactions">Transactions</string>
     <string name="easy_split">Easy Split</string>
-    <string name="todo">TODO</string>
+
     <string name="intro">Easy Split is a user friendly and intuitive app designed to streamline the process of splitting bills effortlessly. Our app provides a convenient platform for organizing, tracking, and sharing expenses, ensuring fairness and transparency in every transaction</string>
     <string name="nameOfApp">Easy Split</string>
+    <string name="just_a_icon">Just a Icon</string>
+    <string name="simplifying_shared">Simplifying Shared</string>
+    <string name="expenses_with_ease">Expenses With Ease!</string>
+    <string name="view_transaction">View Transaction</string>
 
 
 </resources>

@@ -16,6 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+
+        android:id="@+id/initialHomePage"
         android:orientation="vertical">
 
         <ImageView
@@ -89,181 +91,205 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/textViewTopName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="2dp"
-        android:text="@string/easy_split"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        tools:ignore="RtlHardcoded" />
-
-
-    <TextView
-        android:id="@+id/textViewTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/split_your_bill"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        tools:ignore="RtlHardcoded" />
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/summeryHomePage"
+        >
 
         <TextView
-            android:id="@+id/textViewGroupName"
+            android:id="@+id/textViewTopName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:layout_gravity="left"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="2dp"
+            android:text="@string/easy_split"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+
+            tools:ignore="RtlHardcoded" />
+
+
+        <TextView
+            android:id="@+id/textViewTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="20dp"
-            android:text="Group Name"
+            android:text="@string/split_your_bill"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:visibility="gone"
+
             tools:ignore="RtlHardcoded" />
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewGroupName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                android:text="@string/group_name"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold"
+
+                tools:ignore="RtlHardcoded" />
+
+            <Button
+                android:id="@+id/editPersonButton"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="bottom"
+                android:background="@color/transparent"
+                android:drawableTop="@drawable/adduser"
+
+                android:textColor="@color/black"
+
+
+
+                />
+        </LinearLayout>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view_inner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/white"
+            card_view:cardBackgroundColor="@color/white"
+
+            card_view:cardCornerRadius="10dp"
+            card_view:cardElevation="0dp">
+
+
+
+
+            <ListView
+                android:id="@+id/lv1"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:background="@color/white"
+                android:divider="@color/transparent"
+                android:padding="5dp"
+                android:scrollbars="none"
+
+
+                />
+
+            <TextView
+                android:id="@+id/noPersonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:text="No Person Found!!"
+                android:textColor="@color/black"
+                android:visibility="gone"
+                />
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
         <Button
-            android:id="@+id/editPersonButton"
+            android:id="@+id/splitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:padding="1dp"
-            android:text="Edit"
-            android:textSize="10sp"
-            android:visibility="gone"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:layout_marginBottom="20dp"
+            android:padding="20dp"
+            android:text="@string/settle_up"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
 
 
-
-
-
-
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_view_inner"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="20dp"
-        android:background="@color/white"
-        card_view:cardBackgroundColor="@color/white"
-
-        card_view:cardCornerRadius="10dp"
-        card_view:cardElevation="0dp">
-
-        <ListView
-            android:id="@+id/lv1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
             android:background="@color/white"
-            android:divider="@color/transparent"
-            android:padding="5dp"
-            android:scrollbars="none"
-            android:visibility="gone"
+            android:gravity="bottom">
 
-            />
+            <Button
+                android:id="@+id/showTransButton"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:drawableTop="@drawable/paid"
+                android:padding="5dp"
+                android:text="@string/view_transaction"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textStyle="bold"
+
+                tools:ignore="SmallSp" />
+
+            <Button
+                android:id="@+id/addTransButton"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:drawableTop="@drawable/plus1"
+                android:padding="5dp"
+                android:text="@string/add_transaction"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                 />
+
+            <Button
+                android:id="@+id/resetButton"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:drawableTop="@drawable/reset"
+                android:padding="5dp"
+                android:text="@string/reset"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textStyle="bold"
 
 
-    </com.google.android.material.card.MaterialCardView>
+                />
 
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/splitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:padding="20dp"
-        android:text="@string/settle_up"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:visibility="gone" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:background="@color/white"
-        android:gravity="bottom">
-
-        <Button
-            android:id="@+id/showTransButton"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:drawableTop="@drawable/paid"
-            android:padding="5dp"
-            android:text="@string/view_transaction"
-            android:textColor="@color/black"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            tools:ignore="SmallSp" />
-
-        <Button
-            android:id="@+id/addTransButton"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:drawableTop="@drawable/plus1"
-            android:padding="5dp"
-            android:text="@string/add_transaction"
-            android:textColor="@color/black"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/resetButton"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:drawableTop="@drawable/reset"
-            android:padding="5dp"
-            android:text="@string/reset"
-            android:textColor="@color/black"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-
-            />
 
     </LinearLayout>
+
+
+
 
 
 </LinearLayout>

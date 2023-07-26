@@ -3,11 +3,8 @@ package com.example.splityourbill;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,17 +16,17 @@ import androidx.core.content.ContextCompat;
 public class MainActivity extends AppCompatActivity {
 
     public Button createGroupButton;
-    LinearLayout layout;
     public Button addTransButton, showTransButton;
     public Button resetAll, settleUp;
+    LinearLayout layout;
+    TextView noPersonText;
     ListView lv1;
-    ImageView i1;
-    TextView t1,t2,t3,t4;
-    TextView top, topName, groupName;
+TextView top, topName, groupName;
     Button editPersonButton;
 
+    LinearLayout initialHomePage, summaryHomePage;
+
     dataBaseHelper dataBaseHelper = new dataBaseHelper(MainActivity.this);
-    ArrayAdapter personArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,124 +38,86 @@ public class MainActivity extends AppCompatActivity {
         topName = findViewById(R.id.textViewTopName);
         groupName = findViewById(R.id.textViewGroupName);
         editPersonButton = findViewById(R.id.editPersonButton);
+        noPersonText = findViewById(R.id.noPersonText);
 
         createGroupButton = findViewById(R.id.createGroupButton);
         addTransButton = findViewById(R.id.addTransButton);
         resetAll = findViewById(R.id.resetButton);
         settleUp = findViewById(R.id.splitButton);
         showTransButton = findViewById(R.id.showTransButton);
-        i1 = findViewById(R.id.i1);
-        t1 = findViewById(R.id.t1);
-        t2 = findViewById(R.id.t2);
-        t3 = findViewById(R.id.t3);
-        t4 = findViewById(R.id.t4);
         layout = findViewById(R.id.linearlayout);
         lv1 = findViewById(R.id.lv1);
 
-
-
+        initialHomePage = findViewById(R.id.initialHomePage);
+        summaryHomePage = findViewById(R.id.summeryHomePage);
 
 
         showTransButton.setOnClickListener(v -> {
-            if (v.getId() == R.id.showTransButton) {
                 Intent showTransIntent = new Intent(MainActivity.this, ViewTransaction.class);
                 startActivity(showTransIntent);
-            }
         });
 
         ShowPerson(dataBaseHelper);
         int numberOfPerson = dataBaseHelper.getEveryOne().size();
         int numberOfTrans = dataBaseHelper.getEveryTrans().size();
 
-        if (dataBaseHelper.getEveryGroup().size()==1) {
-            createGroupButton.setVisibility(View.GONE);
-            addTransButton.setVisibility(View.VISIBLE);
-            resetAll.setVisibility(View.VISIBLE);
-            i1.setVisibility(View.GONE);
-            t1.setVisibility(View.GONE);
-            t2.setVisibility(View.GONE);
-            t3.setVisibility(View.GONE);
-            t4.setVisibility(View.GONE);
-            lv1.setVisibility(View.VISIBLE);
-            top.setVisibility(View.VISIBLE);
-            topName.setVisibility(View.VISIBLE);
-            groupName.setVisibility(View.VISIBLE);
-            groupName.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
-            editPersonButton.setVisibility(View.VISIBLE);
+        if (numberOfPerson == 0 && dataBaseHelper.getEveryGroup().size() == 1) {
+            noPersonText.setVisibility(View.VISIBLE);
 
+        }
+
+        if (dataBaseHelper.getEveryGroup().size() == 1) {
+            initialHomePage.setVisibility(View.GONE);
+            summaryHomePage.setVisibility(View.VISIBLE);
             layout.setBackground(ContextCompat.getDrawable(this, R.drawable.background));
-
-
-            settleUp.setVisibility(View.VISIBLE);
+            groupName.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
             settleUp.setEnabled(false);
-            showTransButton.setVisibility(View.VISIBLE);
             showTransButton.setEnabled(false);
 
         }
         if (numberOfTrans > 0) {
             settleUp.setEnabled(true);
-
             showTransButton.setEnabled(true);
         }
 
 
-        editPersonButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent addPersonIntent = new Intent(MainActivity.this, createGroupAddName.class);
-                startActivity(addPersonIntent);
-            }
+        editPersonButton.setOnClickListener(v -> {
+            Intent addPersonIntent = new Intent(MainActivity.this, createGroupAddName.class);
+            startActivity(addPersonIntent);
         });
 
         settleUp.setOnClickListener(v -> {
-            if (v.getId() == R.id.splitButton) {
                 Intent settleUpIntent = new Intent(MainActivity.this, SettleUp.class);
                 startActivity(settleUpIntent);
-            }
         });
 
         createGroupButton.setOnClickListener(v -> {
-            if (v.getId() == R.id.createGroupButton) {
                 Intent createGroupIntent = new Intent(MainActivity.this, createGroupAddName.class);
                 startActivity(createGroupIntent);
-            }
         });
-
-
 
 
         resetAll.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Confirmation")
-                    .setMessage("Are you sure you want to reset?")
-                    .setPositiveButton("Yes", (dialog, which) -> {
-                        dataBaseHelper.clearDatabase();
-                        finish();
-                        startActivity(getIntent());
-                    })
-                    .setNegativeButton("No", (dialog, which) -> {
-                        // Do nothing or handle the cancel action
-                    })
-                    .show();
+            builder.setTitle("Confirmation").setMessage("Are you sure you want to reset?").setPositiveButton("Yes", (dialog, which) -> {
+                dataBaseHelper.clearDatabase();
+                finish();
+                startActivity(getIntent());
+            }).setNegativeButton("No", (dialog, which) -> {
+                // Do nothing or handle the cancel action
+            }).show();
         });
 
 
-
         addTransButton.setOnClickListener(v -> {
-            if (v.getId() == R.id.addTransButton) {
                 Intent addTransIntent = new Intent(MainActivity.this, addTransDetails.class);
                 startActivity(addTransIntent);
-            }
         });
 
     }
 
     private void ShowPerson(dataBaseHelper dataBaseHelper) {
         lv1 = findViewById(R.id.lv1);
-//        personArrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.getEveryOne());
-//        lv1.setAdapter(personArrayAdapter);
-
-
         customNameBaseAdapter customNameBaseAdapter = new customNameBaseAdapter(getApplicationContext(), dataBaseHelper.getEveryOne());
         lv1.setAdapter(customNameBaseAdapter);
     }
@@ -169,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(getIntent());
     }
 
-    //on back pressed
     @Override
     public void onBackPressed() {
         finishAffinity();

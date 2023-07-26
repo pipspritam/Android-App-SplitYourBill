@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
     ListView lv1;
     ImageView i1;
     TextView t1,t2,t3,t4;
-    TextView top, topName;
+    TextView top, topName, groupName;
+    Button editPersonButton;
 
     dataBaseHelper dataBaseHelper = new dataBaseHelper(MainActivity.this);
     ArrayAdapter personArrayAdapter;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
         top = findViewById(R.id.textViewTop);
         topName = findViewById(R.id.textViewTopName);
+        groupName = findViewById(R.id.textViewGroupName);
+        editPersonButton = findViewById(R.id.editPersonButton);
 
         createGroupButton = findViewById(R.id.createGroupButton);
         addTransButton = findViewById(R.id.addTransButton);
@@ -53,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
         lv1 = findViewById(R.id.lv1);
 
 
+
+
+
         showTransButton.setOnClickListener(v -> {
             if (v.getId() == R.id.showTransButton) {
                 Intent showTransIntent = new Intent(MainActivity.this, ViewTransaction.class);
@@ -64,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         int numberOfPerson = dataBaseHelper.getEveryOne().size();
         int numberOfTrans = dataBaseHelper.getEveryTrans().size();
 
-        if (numberOfPerson > 0) {
+        if (dataBaseHelper.getEveryGroup().size()==1) {
             createGroupButton.setVisibility(View.GONE);
             addTransButton.setVisibility(View.VISIBLE);
             resetAll.setVisibility(View.VISIBLE);
@@ -76,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
             lv1.setVisibility(View.VISIBLE);
             top.setVisibility(View.VISIBLE);
             topName.setVisibility(View.VISIBLE);
+            groupName.setVisibility(View.VISIBLE);
+            groupName.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
+            editPersonButton.setVisibility(View.VISIBLE);
 
             layout.setBackground(ContextCompat.getDrawable(this, R.drawable.background));
 
@@ -92,6 +101,14 @@ public class MainActivity extends AppCompatActivity {
             showTransButton.setEnabled(true);
         }
 
+
+        editPersonButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent addPersonIntent = new Intent(MainActivity.this, createGroupAddName.class);
+                startActivity(addPersonIntent);
+            }
+        });
 
         settleUp.setOnClickListener(v -> {
             if (v.getId() == R.id.splitButton) {

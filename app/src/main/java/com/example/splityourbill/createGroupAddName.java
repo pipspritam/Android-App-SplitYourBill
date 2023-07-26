@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class createGroupAddName extends AppCompatActivity {
@@ -21,6 +22,7 @@ public class createGroupAddName extends AppCompatActivity {
 
     dataBaseHelper dataBaseHelper = new dataBaseHelper(createGroupAddName.this);
     ArrayAdapter personArrayAdapter;
+    Button goToHomeButton, resetButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +32,12 @@ public class createGroupAddName extends AppCompatActivity {
         nameEditText = findViewById(R.id.addName);
         addNameTextView = findViewById(R.id.addNameTitle);
 
+        goToHomeButton = findViewById(R.id.goToHomeButton);
+        resetButton = findViewById(R.id.resetButton);
+
         addButton = findViewById(R.id.addNameButton);
         lv = findViewById(R.id.listViewAddLayout);
-        startTrans = findViewById(R.id.startTrans);
+        startTrans = findViewById(R.id.goToAddTrans);
 
         groupEditText = findViewById(R.id.addGroupNameEditText);
         addGroupButton = findViewById(R.id.addGroupNameButton);
@@ -90,7 +95,8 @@ public class createGroupAddName extends AppCompatActivity {
                 Toast.makeText(createGroupAddName.this, "Name Added", Toast.LENGTH_SHORT).show();
                 nameEditText.setText(null);
                 if (dataBaseHelper.getEveryOne().size() >= 2) {
-                    startTrans.setVisibility(View.VISIBLE);
+                    startTrans.setEnabled(true);
+
                 }
             }
 
@@ -100,6 +106,30 @@ public class createGroupAddName extends AppCompatActivity {
         startTrans.setOnClickListener(v -> {
             Intent mainIntent = new Intent(createGroupAddName.this, addTransDetails.class);
             startActivity(mainIntent);
+        });
+
+
+        goToHomeButton.setOnClickListener(v -> {
+            if (v.getId() == R.id.goToHomeButton) {
+                Intent homeIntent = new Intent(createGroupAddName.this, MainActivity.class);
+                startActivity(homeIntent);
+            }
+        });
+
+        resetButton.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Confirmation")
+                    .setMessage("Are you sure you want to reset?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        dataBaseHelper.clearDatabase();
+                        Intent homeIntent = new Intent(createGroupAddName.this, MainActivity.class);
+                        startActivity(homeIntent);
+
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // Do nothing or handle the cancel action
+                    })
+                    .show();
         });
     }
 

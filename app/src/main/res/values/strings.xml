@@ -24,6 +24,7 @@
     <string name="simplifying_shared">Simplifying Shared</string>
     <string name="expenses_with_ease">Expenses With Ease!</string>
     <string name="view_transaction">View Transaction</string>
+    <string name="group_name">Group Name</string>
 
 
 </resources>

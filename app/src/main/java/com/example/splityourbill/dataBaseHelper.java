@@ -24,6 +24,8 @@ public class dataBaseHelper extends SQLiteOpenHelper {
     public static final String description = "PAYDESCRIPTION";
     public static final String involved = "INVOLVED";
 
+    public static final String groupName = "GROUPNAME";
+    public static final String gName = "GNAME";
     public dataBaseHelper(@Nullable Context context) {
         super(context, "splitBillDataBase", null, 1);
     }
@@ -37,11 +39,49 @@ public class dataBaseHelper extends SQLiteOpenHelper {
 
         String createTableTransaction = "CREATE TABLE " + transactionT + " (" + payee + " STRING, " + amount + " DOUBLE(10.2), " + description + " STRING, " + involved + " STRING)";
         db.execSQL(createTableTransaction);
+
+
+        String createTableStatementGroupName = "CREATE TABLE " + groupName + " (" + gName + " STRING PRIMARY KEY)";
+        db.execSQL(createTableStatementGroupName);
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    public boolean addOneGroup(Group group) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(gName, group.getGroupName());
+
+        long insert = db.insert(groupName, null, cv);
+
+        return insert != -1;
+
+    }
+
+
+    public List<Group> getEveryGroup() {
+        List<Group> returnList = new ArrayList<>();
+        String quarryString = "SELECT * FROM " + groupName;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(quarryString, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                String nameP = cursor.getString(0);
+                Group newP = new Group(nameP);
+                returnList.add(newP);
+            } while (cursor.moveToNext());
+        } else {
+            cursor.close();
+            db.close();
+            return returnList;
+        }
+        return returnList;
     }
 
     public boolean addOne(person person) {
@@ -70,8 +110,7 @@ public class dataBaseHelper extends SQLiteOpenHelper {
                 person newP = new person(nameP, balanceP);
 
                 returnList.add(newP);
-            }
-            while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         } else {
             cursor.close();
             db.close();
@@ -110,8 +149,7 @@ public class dataBaseHelper extends SQLiteOpenHelper {
                 TransactionModel transactionModel = new TransactionModel(payee, amount, desc, inv);
 
                 returnList.add(transactionModel);
-            }
-            while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         } else {
             cursor.close();
             db2.close();
@@ -125,8 +163,11 @@ public class dataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String clearDBQuery1 = "DELETE FROM " + personT;
         String clearDBQuery2 = "DELETE FROM " + transactionT;
+        String clearDBQuery3 = "DELETE FROM " + groupName;
+
         db.execSQL(clearDBQuery1);
         db.execSQL(clearDBQuery2);
+        db.execSQL(clearDBQuery3);
     }
 
     public void updateBalance(String name, double val) {
@@ -143,6 +184,8 @@ public class dataBaseHelper extends SQLiteOpenHelper {
         String upBalance = "UPDATE PERSON SET BALANCE = " + exBalance + " WHERE NAME = '" + name + "'";
         db.execSQL(upBalance);
     }
+
+
 
 
 }

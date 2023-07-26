@@ -7,15 +7,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class createGroupAddName extends AppCompatActivity {
 
-    EditText nameEditText;
-    Button addButton, startTrans;
+    EditText nameEditText, groupEditText;
+    Button addButton, startTrans, addGroupButton;
     ListView lv;
+    TextView groupNameTextView, addNameTextView;
 
     dataBaseHelper dataBaseHelper = new dataBaseHelper(createGroupAddName.this);
     ArrayAdapter personArrayAdapter;
@@ -26,11 +28,51 @@ public class createGroupAddName extends AppCompatActivity {
         setContentView(R.layout.activity_create_group_add_name);
 
         nameEditText = findViewById(R.id.addName);
+        addNameTextView = findViewById(R.id.addNameTitle);
+
         addButton = findViewById(R.id.addNameButton);
         lv = findViewById(R.id.listViewAddLayout);
         startTrans = findViewById(R.id.startTrans);
 
+        groupEditText = findViewById(R.id.addGroupNameEditText);
+        addGroupButton = findViewById(R.id.addGroupNameButton);
+        groupNameTextView = findViewById(R.id.addGroupName);
+
         ShowPerson(dataBaseHelper);
+
+        if(dataBaseHelper.getEveryGroup().size() == 1){
+            groupNameTextView.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
+            addGroupButton.setVisibility(View.GONE);
+            groupEditText.setVisibility(View.GONE);
+            nameEditText.setVisibility(View.VISIBLE);
+            addButton.setVisibility(View.VISIBLE);
+            lv.setVisibility(View.VISIBLE);
+            addNameTextView.setVisibility(View.VISIBLE);
+        }
+
+
+        addGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String groupName = groupEditText.getText().toString();
+                groupName = groupName.trim();
+                if (groupName.isEmpty()) {
+                    Toast.makeText(createGroupAddName.this, "Enter a valid Group Name", Toast.LENGTH_SHORT).show();
+                    groupEditText.setText(null);
+                } else {
+                    Group group = new Group(groupName);
+                    dataBaseHelper.addOneGroup(group);
+                    Toast.makeText(createGroupAddName.this, "Group Added", Toast.LENGTH_SHORT).show();
+                    groupNameTextView.setText(groupName);
+                    groupEditText.setText(null);
+                    //reload activity
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+
+                }
+            }
+        });
 
 
         addButton.setOnClickListener(v -> {

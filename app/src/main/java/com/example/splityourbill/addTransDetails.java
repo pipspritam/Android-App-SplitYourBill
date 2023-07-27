@@ -27,6 +27,9 @@ public class addTransDetails extends AppCompatActivity {
     ArrayAdapter transactionArrayAdapter;
     Spinner sp;
     TextView textViewInvolvedPeople;
+
+    Button showTransButton, settleUpButton;
+
     boolean[] selectedPerson;
     ArrayList<Integer> langList = new ArrayList<>();
 
@@ -54,6 +57,19 @@ public class addTransDetails extends AppCompatActivity {
         setContentView(R.layout.activity_add_trans_details);
 
         goToHomeButton = findViewById(R.id.goToHomeButton);
+        showTransButton = findViewById(R.id.showTransButton);
+        settleUpButton = findViewById(R.id.goToSettleUp);
+
+        showTransButton.setOnClickListener(v -> {
+            Intent showTransIntent = new Intent(addTransDetails.this, ViewTransaction.class);
+            startActivity(showTransIntent);
+        });
+
+        settleUpButton.setOnClickListener(v -> {
+            Intent backIntent = new Intent(addTransDetails.this, SettleUp.class);
+            startActivity(backIntent);
+        });
+
 
         goToHomeButton.setOnClickListener(v -> {
             Intent homeIntent = new Intent(addTransDetails.this, MainActivity.class);
@@ -95,7 +111,7 @@ public class addTransDetails extends AppCompatActivity {
 
         amountEditText = findViewById(R.id.addPayeeAmount);
         descEditText = findViewById(R.id.addPayeeDesc);
-        lv = findViewById(R.id.transViewAddLayout);
+//        lv = findViewById(R.id.transViewAddLayout);
 
         addTransDB = findViewById(R.id.addTransToDB);
 
@@ -104,7 +120,7 @@ public class addTransDetails extends AppCompatActivity {
         sp.setAdapter(adapter_options);
 
 
-        ShowTrans(dataBaseHelper);
+//        ShowTrans(dataBaseHelper);
 
 
         addTransDB.setOnClickListener(v -> {
@@ -134,7 +150,7 @@ public class addTransDetails extends AppCompatActivity {
             descEditText.setText(null);
             textViewInvolvedPeople.setText("");
 
-            ShowTrans(dataBaseHelper);
+//            ShowTrans(dataBaseHelper);
 
         });
     }
@@ -148,10 +164,10 @@ public class addTransDetails extends AppCompatActivity {
     }
 
 
-    private void ShowTrans(dataBaseHelper dataBaseHelper) {
-        transactionArrayAdapter = new ArrayAdapter<>(addTransDetails.this, android.R.layout.simple_list_item_1, dataBaseHelper.getEveryTrans());
-        lv.setAdapter(transactionArrayAdapter);
-    }
+//    private void ShowTrans(dataBaseHelper dataBaseHelper) {
+//        transactionArrayAdapter = new ArrayAdapter<>(addTransDetails.this, android.R.layout.simple_list_item_1, dataBaseHelper.getEveryTrans());
+//        lv.setAdapter(transactionArrayAdapter);
+//    }
 
     private void updateSelectedItems() {
         StringBuilder stringBuilder = new StringBuilder();

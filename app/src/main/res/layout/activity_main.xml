@@ -160,10 +160,7 @@
                 android:layout_gravity="bottom"
                 android:background="@color/transparent"
                 android:drawableTop="@drawable/adduser"
-
                 android:textColor="@color/black"
-
-
 
                 />
         </LinearLayout>
@@ -182,8 +179,6 @@
 
             card_view:cardCornerRadius="10dp"
             card_view:cardElevation="0dp">
-
-
 
 
             <ListView
@@ -280,16 +275,10 @@
                 android:textSize="11sp"
                 android:textStyle="bold"
 
-
                 />
 
         </LinearLayout>
 
-
     </LinearLayout>
-
-
-
-
 
 </LinearLayout>

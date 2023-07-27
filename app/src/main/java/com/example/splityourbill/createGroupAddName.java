@@ -56,26 +56,23 @@ public class createGroupAddName extends AppCompatActivity {
         }
 
 
-        addGroupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String groupName = groupEditText.getText().toString();
-                groupName = groupName.trim();
-                if (groupName.isEmpty()) {
-                    Toast.makeText(createGroupAddName.this, "Enter a valid Group Name", Toast.LENGTH_SHORT).show();
-                    groupEditText.setText(null);
-                } else {
-                    Group group = new Group(groupName);
-                    dataBaseHelper.addOneGroup(group);
-                    Toast.makeText(createGroupAddName.this, "Group Added", Toast.LENGTH_SHORT).show();
-                    groupNameTextView.setText(groupName);
-                    groupEditText.setText(null);
-                    //reload activity
-                    Intent intent = getIntent();
-                    finish();
-                    startActivity(intent);
+        addGroupButton.setOnClickListener(v -> {
+            String groupName = groupEditText.getText().toString();
+            groupName = groupName.trim();
+            if (groupName.isEmpty()) {
+                Toast.makeText(createGroupAddName.this, "Enter a valid Group Name", Toast.LENGTH_SHORT).show();
+                groupEditText.setText(null);
+            } else {
+                Group group = new Group(groupName);
+                dataBaseHelper.addOneGroup(group);
+                Toast.makeText(createGroupAddName.this, "Group Added", Toast.LENGTH_SHORT).show();
+                groupNameTextView.setText(groupName);
+                groupEditText.setText(null);
+                //reload activity
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
 
-                }
             }
         });
 
@@ -110,10 +107,8 @@ public class createGroupAddName extends AppCompatActivity {
 
 
         goToHomeButton.setOnClickListener(v -> {
-            if (v.getId() == R.id.goToHomeButton) {
                 Intent homeIntent = new Intent(createGroupAddName.this, MainActivity.class);
                 startActivity(homeIntent);
-            }
         });
 
         resetButton.setOnClickListener(v -> {

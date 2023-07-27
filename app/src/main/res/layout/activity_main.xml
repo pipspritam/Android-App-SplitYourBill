@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-
+        android:visibility="visible"
         android:id="@+id/initialHomePage"
         android:orientation="vertical">
 
@@ -135,7 +135,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
@@ -202,9 +202,9 @@
                 android:id="@+id/noPersonText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:layout_gravity="center"
-                android:text="No Person Found!!"
+                android:text="@string/no_person_found"
                 android:textColor="@color/black"
                 android:visibility="gone"
                 />

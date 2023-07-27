@@ -47,8 +47,15 @@ public class customNameBaseAdapter extends BaseAdapter {
             textView.setText(personList.get(position).getName() + " owes ");
             textView1.setTextColor(Color.parseColor("#FF0000"));
         }
-        else {
+//        else {
+//            textView.setText(personList.get(position).getName() + " gets ");
+//            textView1.setTextColor(Color.parseColor("#64ED26"));
+//        }
+        else if (personList.get(position).getBalance() > 0) {
             textView.setText(personList.get(position).getName() + " gets ");
+            textView1.setTextColor(Color.parseColor("#64ED26"));
+        } else {
+            textView.setText(personList.get(position).getName() + " has no balance");
             textView1.setTextColor(Color.parseColor("#64ED26"));
         }
         return convertView;

@@ -41,6 +41,14 @@ public class SettleUp extends AppCompatActivity {
         List<String> results_list = new ArrayList<>();
         sortPeopleByBalance(listOfPerson);
 
+        for(int i=0;i<n;i++){
+            if(listOfPerson.get(i).balance == 0){
+                listOfPerson.remove(i);
+                n = listOfPerson.size();
+            }
+        }
+        n = listOfPerson.size();
+
         while (n > 1) {
             n = listOfPerson.size();
             sortPeopleByBalance(listOfPerson);

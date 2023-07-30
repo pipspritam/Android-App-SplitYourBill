@@ -1,38 +1,37 @@
 package com.example.splityourbill;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class MainActivity extends AppCompatActivity {
 
     public Button createGroupButton;
     public Button addTransButton, showTransButton;
     public Button resetAll, settleUp;
-//    LinearLayout layout;
     TextView noPersonText;
     ListView lv1;
-TextView top, topName, groupName;
+    TextView top, topName, groupName;
     Button editPersonButton;
 
-    LinearLayout initialHomePage, summaryHomePage;
+    ConstraintLayout initialHomePage, summaryHomePage;
 
     dataBaseHelper dataBaseHelper = new dataBaseHelper(MainActivity.this);
 
+    @SuppressLint("UnsafeIntentLaunch")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         top = findViewById(R.id.textViewTop);
         topName = findViewById(R.id.textViewTopName);
@@ -45,7 +44,6 @@ TextView top, topName, groupName;
         resetAll = findViewById(R.id.resetButton);
         settleUp = findViewById(R.id.splitButton);
         showTransButton = findViewById(R.id.showTransButton);
-//        layout = findViewById(R.id.linearlayout);
         lv1 = findViewById(R.id.lv1);
 
         initialHomePage = findViewById(R.id.initialHomePage);
@@ -53,8 +51,8 @@ TextView top, topName, groupName;
 
 
         showTransButton.setOnClickListener(v -> {
-                Intent showTransIntent = new Intent(MainActivity.this, ViewTransaction.class);
-                startActivity(showTransIntent);
+            Intent showTransIntent = new Intent(MainActivity.this, ViewTransaction.class);
+            startActivity(showTransIntent);
         });
 
         ShowPerson(dataBaseHelper);
@@ -62,6 +60,7 @@ TextView top, topName, groupName;
         int numberOfTrans = dataBaseHelper.getEveryTrans().size();
 
         if (numberOfPerson == 0 && dataBaseHelper.getEveryGroup().size() == 1) {
+            System.out.println("No person");
             noPersonText.setVisibility(View.VISIBLE);
 
         }
@@ -69,7 +68,6 @@ TextView top, topName, groupName;
         if (dataBaseHelper.getEveryGroup().size() == 1) {
             initialHomePage.setVisibility(View.GONE);
             summaryHomePage.setVisibility(View.VISIBLE);
-//            layout.setBackground(ContextCompat.getDrawable(this, R.drawable.background));
             groupName.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
             settleUp.setEnabled(false);
             showTransButton.setEnabled(false);
@@ -87,13 +85,13 @@ TextView top, topName, groupName;
         });
 
         settleUp.setOnClickListener(v -> {
-                Intent settleUpIntent = new Intent(MainActivity.this, SettleUp.class);
-                startActivity(settleUpIntent);
+            Intent settleUpIntent = new Intent(MainActivity.this, SettleUp.class);
+            startActivity(settleUpIntent);
         });
 
         createGroupButton.setOnClickListener(v -> {
-                Intent createGroupIntent = new Intent(MainActivity.this, createGroupAddName.class);
-                startActivity(createGroupIntent);
+            Intent createGroupIntent = new Intent(MainActivity.this, createGroupAddName.class);
+            startActivity(createGroupIntent);
         });
 
 
@@ -110,8 +108,8 @@ TextView top, topName, groupName;
 
 
         addTransButton.setOnClickListener(v -> {
-                Intent addTransIntent = new Intent(MainActivity.this, addTransDetails.class);
-                startActivity(addTransIntent);
+            Intent addTransIntent = new Intent(MainActivity.this, addTransDetails.class);
+            startActivity(addTransIntent);
         });
 
     }
@@ -122,6 +120,7 @@ TextView top, topName, groupName;
         lv1.setAdapter(customNameBaseAdapter);
     }
 
+    @SuppressLint("UnsafeIntentLaunch")
     public void onRestart() {
         super.onRestart();
         finish();

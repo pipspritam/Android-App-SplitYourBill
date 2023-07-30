@@ -12,9 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SplitYourBill"
         tools:targetApi="31">
-        <activity
-            android:name=".MainActivity2"
-            android:exported="false" />
+
         <activity
             android:name=".customNameList"
             android:exported="false" />

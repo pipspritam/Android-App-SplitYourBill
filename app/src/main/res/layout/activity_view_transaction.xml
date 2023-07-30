@@ -45,13 +45,24 @@
         android:layout_gravity="left"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/transactions"
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"
         tools:ignore="RtlHardcoded" />
 
+    <TextView
+        android:id="@+id/viewGroupName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:text="Group Name"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold"
+         />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_view_inner"

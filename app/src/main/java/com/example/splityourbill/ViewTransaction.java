@@ -1,22 +1,24 @@
 package com.example.splityourbill;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ViewTransaction extends AppCompatActivity {
 
     ListView lv1;
     Button goToHomeButton;
     ImageButton goToBackButton;
-    ArrayAdapter transactionArrayAdapter;
+//    ArrayAdapter transactionArrayAdapter;
     Button settleUpButton, addTransButton;
+    TextView textViewGroupName;
 
+    dataBaseHelper dataBaseHelper = new dataBaseHelper(ViewTransaction.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,10 @@ public class ViewTransaction extends AppCompatActivity {
         goToBackButton = findViewById(R.id.goToBackButton);
         settleUpButton = findViewById(R.id.goToSettleUp);
         addTransButton = findViewById(R.id.goToaddTrans);
+        textViewGroupName = findViewById(R.id.viewGroupName);
+
+
+        textViewGroupName.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
 
 
         settleUpButton.setOnClickListener(v -> {
@@ -60,13 +66,10 @@ public class ViewTransaction extends AppCompatActivity {
             }
         });
 
-
         lv1 = findViewById(R.id.lv1);
         dataBaseHelper dataBaseHelper = new dataBaseHelper(ViewTransaction.this);
         customBaseAdapter customBaseAdapter = new customBaseAdapter(getApplicationContext(), dataBaseHelper.getEveryTrans());
         lv1.setAdapter(customBaseAdapter);
-
-
 
     }
 }

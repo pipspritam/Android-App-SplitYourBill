@@ -2,13 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="5dp"
     tools:context=".MainActivity">
 
 
@@ -97,6 +95,8 @@
         android:orientation="vertical"
         android:gravity="center"
         android:visibility="gone"
+        android:background="@drawable/background"
+        android:padding="5dp"
         android:id="@+id/summeryHomePage"
         >
 

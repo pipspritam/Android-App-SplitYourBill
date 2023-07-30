@@ -1,154 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
+    android:padding="5dp"
     tools:context=".ViewTransaction">
 
     <ImageButton
         android:id="@+id/goToBackButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="left|top"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_weight="0"
         android:background="@color/transparent"
         android:contentDescription="@string/just_a_icon"
-        android:padding="20dp"
-        android:layout_weight="0"
+        android:padding="10dp"
         android:src="@drawable/back"
-         />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
 
     <TextView
         android:id="@+id/textViewTopName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="1dp"
+        android:fontFamily="@font/poppins"
         android:text="@string/easy_split"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:textStyle="bold"
-         />
 
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goToBackButton" />
 
     <TextView
         android:id="@+id/textViewTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginLeft="30dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/poppins_medium"
         android:text="@string/transactions"
         android:textColor="@color/white"
         android:textSize="25sp"
-        android:textStyle="bold"
-        tools:ignore="RtlHardcoded" />
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTopName" />
 
     <TextView
         android:id="@+id/viewGroupName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
         android:text="Group Name"
         android:textColor="@color/white"
         android:textSize="25sp"
-        android:textStyle="bold"
-         />
+        android:fontFamily="@font/poppins_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
 
-    <com.google.android.material.card.MaterialCardView
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/card_view_inner"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
         android:background="@color/white"
-        card_view:cardElevation="0dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewGroupName">
 
-        card_view:cardBackgroundColor="@color/white"
-        card_view:cardCornerRadius="10dp">
 
         <ListView
             android:id="@+id/lv1"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:padding="5dp"
+            android:layout_height="400dp"
             android:background="@color/white"
-            android:scrollbars="none"
             android:divider="@color/transparent"
+            android:padding="5dp"
+            android:scrollbars="vertical"
+            android:visibility="visible"
 
             />
 
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:background="@color/white"
-        android:gravity="bottom">
+    <Button
+        android:id="@+id/goToHomeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
 
-        <Button
-            android:id="@+id/goToHomeButton"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:drawableTop="@drawable/home"
-            android:padding="5dp"
-            android:layout_gravity="bottom"
-            android:text="@string/home"
-            android:textColor="@color/black"
-            android:textSize="11sp"
-            android:textStyle="bold" />
+        android:background="@color/transparent"
+        android:drawableTop="@drawable/home"
+        android:fontFamily="@font/poppins"
+        android:padding="5dp"
+        android:text="@string/home"
+        android:textColor="@color/black"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/goToAddTrans"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/goToaddTrans"
-            android:drawableTop="@drawable/plus1"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:padding="5dp"
-            android:layout_gravity="bottom"
-            android:text="Add Transaction"
-            android:textColor="@color/black"
-            android:textSize="11sp"
-            android:textStyle="bold" />
+    <Button
+        android:id="@+id/goToAddTrans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/transparent"
+        android:drawableTop="@drawable/plus1"
+        android:fontFamily="@font/poppins"
+        android:padding="5dp"
+        android:text="@string/add_transaction"
+        android:textColor="@color/black"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/goToSettleUp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/goToHomeButton" />
 
-        <Button
-            android:id="@+id/goToSettleUp"
-            android:drawableTop="@drawable/estimate"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:padding="5dp"
-            android:layout_gravity="bottom"
-            android:text="@string/settle_up"
-            android:textColor="@color/black"
-            android:textSize="11sp"
-            android:textStyle="bold"
+    <Button
+        android:id="@+id/goToSettleUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/transparent"
+        android:drawableTop="@drawable/estimate"
+        android:fontFamily="@font/poppins"
+        android:padding="5dp"
 
-            />
+        android:text="@string/settle_up"
 
-    </LinearLayout>
+        android:textColor="@color/black"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/goToAddTrans" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

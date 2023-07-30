@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     public Button createGroupButton;
     public Button addTransButton, showTransButton;
     public Button resetAll, settleUp;
-    LinearLayout layout;
+//    LinearLayout layout;
     TextView noPersonText;
     ListView lv1;
 TextView top, topName, groupName;
@@ -45,7 +45,7 @@ TextView top, topName, groupName;
         resetAll = findViewById(R.id.resetButton);
         settleUp = findViewById(R.id.splitButton);
         showTransButton = findViewById(R.id.showTransButton);
-        layout = findViewById(R.id.linearlayout);
+//        layout = findViewById(R.id.linearlayout);
         lv1 = findViewById(R.id.lv1);
 
         initialHomePage = findViewById(R.id.initialHomePage);
@@ -69,7 +69,7 @@ TextView top, topName, groupName;
         if (dataBaseHelper.getEveryGroup().size() == 1) {
             initialHomePage.setVisibility(View.GONE);
             summaryHomePage.setVisibility(View.VISIBLE);
-            layout.setBackground(ContextCompat.getDrawable(this, R.drawable.background));
+//            layout.setBackground(ContextCompat.getDrawable(this, R.drawable.background));
             groupName.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
             settleUp.setEnabled(false);
             showTransButton.setEnabled(false);

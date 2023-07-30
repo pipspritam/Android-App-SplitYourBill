@@ -28,7 +28,7 @@ public class ViewTransaction extends AppCompatActivity {
         goToHomeButton = findViewById(R.id.goToHomeButton);
         goToBackButton = findViewById(R.id.goToBackButton);
         settleUpButton = findViewById(R.id.goToSettleUp);
-        addTransButton = findViewById(R.id.goToaddTrans);
+        addTransButton = findViewById(R.id.goToAddTrans);
         textViewGroupName = findViewById(R.id.viewGroupName);
 
 
@@ -44,7 +44,7 @@ public class ViewTransaction extends AppCompatActivity {
         });
 
         addTransButton.setOnClickListener(v -> {
-            if (v.getId() == R.id.goToaddTrans) {
+            if (v.getId() == R.id.goToAddTrans) {
                 Intent backIntent = new Intent(ViewTransaction.this, addTransDetails.class);
                 startActivity(backIntent);
             }

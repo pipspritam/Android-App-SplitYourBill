@@ -34,7 +34,7 @@
             android:fontFamily="@font/poppins_medium"
             android:textSize="18sp"
             android:background="@color/white"
-            android:textFontWeight="1000"
+
             android:text="Arya Gets"
             />
 

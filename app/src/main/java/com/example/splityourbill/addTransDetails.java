@@ -2,9 +2,11 @@ package com.example.splityourbill;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,10 +28,11 @@ public class addTransDetails extends AppCompatActivity {
     dataBaseHelper dataBaseHelper = new dataBaseHelper(addTransDetails.this);
     ArrayAdapter transactionArrayAdapter;
     Spinner sp;
-    TextView textViewInvolvedPeople;
+    TextView textViewInvolvedPeople, textViewGroupName;
 
     Button showTransButton, settleUpButton;
 
+    ImageButton goToBackButton;
     boolean[] selectedPerson;
     ArrayList<Integer> langList = new ArrayList<>();
 
@@ -59,6 +62,19 @@ public class addTransDetails extends AppCompatActivity {
         goToHomeButton = findViewById(R.id.goToHomeButton);
         showTransButton = findViewById(R.id.showTransButton);
         settleUpButton = findViewById(R.id.goToSettleUp);
+        goToBackButton = findViewById(R.id.goToBackButton);
+        textViewGroupName = findViewById(R.id.viewGroupName);
+
+        textViewGroupName.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
+
+
+        goToBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent backIntent = new Intent(addTransDetails.this, MainActivity.class);
+                startActivity(backIntent);
+            }
+        });
 
         showTransButton.setOnClickListener(v -> {
             Intent showTransIntent = new Intent(addTransDetails.this, ViewTransaction.class);

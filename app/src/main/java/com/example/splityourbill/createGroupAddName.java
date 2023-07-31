@@ -44,6 +44,10 @@ public class createGroupAddName extends AppCompatActivity {
         groupNameTextView = findViewById(R.id.addGroupName);
 
         ShowPerson(dataBaseHelper);
+        if (dataBaseHelper.getEveryOne().size() >= 2) {
+            startTrans.setEnabled(true);
+
+        }
 
         if(dataBaseHelper.getEveryGroup().size() == 1){
             groupNameTextView.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
@@ -91,10 +95,7 @@ public class createGroupAddName extends AppCompatActivity {
                 ShowPerson(dataBaseHelper);
                 Toast.makeText(createGroupAddName.this, "Name Added", Toast.LENGTH_SHORT).show();
                 nameEditText.setText(null);
-                if (dataBaseHelper.getEveryOne().size() >= 2) {
-                    startTrans.setEnabled(true);
 
-                }
             }
 
 

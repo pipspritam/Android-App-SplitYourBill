@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -15,7 +17,9 @@ import java.util.List;
 public class SettleUp extends AppCompatActivity {
     public ListView lv;
     ArrayAdapter settleUpArrayAdapter;
-    Button goToHomeButton;
+    Button goToHomeButton, viewTransButton, resetButton;
+
+    TextView groupNameTextView;
     dataBaseHelper dataBaseHelper = new dataBaseHelper(SettleUp.this);
 
     public static void sortPeopleByBalance(List<person> people) {
@@ -27,11 +31,34 @@ public class SettleUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settle_up);
         lv = findViewById(R.id.settleUpListView);
-        goToHomeButton = findViewById(R.id.goHome);
+        goToHomeButton = findViewById(R.id.goToHomeButton);
+        viewTransButton = findViewById(R.id.showTransButton);
+        groupNameTextView = findViewById(R.id.viewGroupName);
+        groupNameTextView.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
+        resetButton = findViewById(R.id.resetButton);
+
+        resetButton.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Confirmation").setMessage("Are you sure you want to reset?").setPositiveButton("Yes", (dialog, which) -> {
+                dataBaseHelper.clearDatabase();
+                finish();
+                startActivity(getIntent());
+            }).setNegativeButton("No", (dialog, which) -> {
+                // Do nothing or handle the cancel action
+            }).show();
+        });
+
+
+        viewTransButton.setOnClickListener(v -> {
+            if (v.getId() == R.id.showTransButton) {
+                Intent viewTransIntent = new Intent(SettleUp.this, ViewTransaction.class);
+                startActivity(viewTransIntent);
+            }
+        });
 
 
         goToHomeButton.setOnClickListener(v -> {
-            if (v.getId() == R.id.goHome) {
+            if (v.getId() == R.id.goToHomeButton) {
                 Intent homeIntent = new Intent(SettleUp.this, MainActivity.class);
                 startActivity(homeIntent);
             }

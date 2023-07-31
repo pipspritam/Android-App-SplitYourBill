@@ -4,54 +4,117 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:background="@drawable/background"
+    android:orientation="vertical"
     android:padding="5dp"
     tools:context=".MainActivity2">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Settle Up"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/viewGroupName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/group_name"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        app:cardCornerRadius="5dp"
-        android:padding="5dp"
-        app:cardElevation="3dp"
-        android:layout_margin="5dp"
-        app:contentPadding="10dp"
-        app:cardPreventCornerOverlap="true"
-        android:layout_gravity="center"
-        app:cardBackgroundColor="@color/white" >
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewGroupName">
 
-        <TextView
-            android:id="@+id/customTextView"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:text="Arya Paid Food \nPritam | Arya | Rimi | Anti | Arya Paid Food Pritam | Arya | Rimi | Anti"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/customTextViewAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:layout_marginStart="15dp"
-            android:textColor="@color/black"
-            android:text="Rs 200000"
-            android:textSize="23sp"
-            android:background="@color/white"
-            android:layout_gravity="end"
-            />
+        <ListView
+            android:id="@+id/settleUpListView"
+            android:layout_width="match_parent"
+            android:layout_height="400dp" />
 
     </androidx.cardview.widget.CardView>
 
+    <Button
+        android:id="@+id/goToHomeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+
+        android:background="@color/transparent"
+        android:drawableTop="@drawable/home"
+        android:fontFamily="@font/poppins"
+        android:padding="5dp"
+        android:text="@string/home"
+        android:textColor="@color/black"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/showTransButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/showTransButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/transparent"
+        android:drawableTop="@drawable/paid"
+        android:fontFamily="@font/poppins"
+        android:padding="5dp"
+        android:text="@string/view_transaction"
+        android:textColor="@color/black"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/resetButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/goToHomeButton" />
+
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/transparent"
+        android:drawableTop="@drawable/reset"
+        android:fontFamily="@font/poppins"
+        android:padding="5dp"
+
+        android:text="@string/reset"
+
+        android:textColor="@color/black"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/showTransButton" />
 
 
 

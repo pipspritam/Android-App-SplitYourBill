@@ -35,7 +35,7 @@
                 android:id="@+id/customTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"
+                android:layout_weight="0.68"
                 android:fontFamily="@font/poppins_medium"
                 android:background="@color/white"
                 android:text="Arya Paid Food \nPritam | Arya | Rimi | Anti | Arya Paid Food Pritam | Arya | Rimi | Anti"

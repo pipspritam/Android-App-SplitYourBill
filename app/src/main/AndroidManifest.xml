@@ -23,18 +23,22 @@
             android:exported="false" />
         <activity
             android:name=".ViewTransaction"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".SettleUp"
             android:exported="false" />
         <activity
             android:name=".addTransDetails"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".createGroupAddName"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

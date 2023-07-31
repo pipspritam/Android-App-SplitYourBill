@@ -10,54 +10,61 @@
     tools:context=".MainActivity2">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/addGroupName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="Settle Up"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/viewGroupName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="@string/group_name"
+        android:text="New Group"
         android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
+
+    <EditText
+        android:id="@+id/addGroupNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
-        android:background="@color/white"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="0dp"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewGroupName">
+        app:layout_constraintTop_toBottomOf="@+id/addGroupName"
+        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:hint="Enter Group Name"
+        android:background="@color/transparent"
+        android:inputType="textCapWords"
+        android:textSize="25sp"
+        android:importantForAutofill="no"/>
 
 
-        <ListView
-            android:id="@+id/settleUpListView"
-            android:layout_width="match_parent"
-            android:layout_height="400dp" />
 
-    </androidx.cardview.widget.CardView>
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="30dp"-->
+<!--        android:layout_marginEnd="30dp"-->
+<!--        android:background="@color/white"-->
+<!--        app:cardCornerRadius="10dp"-->
+<!--        app:cardElevation="0dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/editText">-->
+
+
+<!--        <ListView-->
+<!--            android:id="@+id/settleUpListView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="400dp" />-->
+
+<!--    </androidx.cardview.widget.CardView>-->
 
     <Button
         android:id="@+id/goToHomeButton"
@@ -66,31 +73,31 @@
         android:layout_marginBottom="10dp"
 
         android:background="@color/transparent"
-        android:drawableTop="@drawable/home"
-        android:fontFamily="@font/poppins"
+        android:drawableTop="@drawable/paid"
+        android:fontFamily="@font/poppins_medium"
         android:padding="5dp"
-        android:text="@string/home"
+        android:text="@string/view_transaction"
         android:textColor="@color/black"
-        android:textSize="11sp"
-        android:textStyle="bold"
+        android:textSize="10sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/showTransButton"
+        app:layout_constraintEnd_toStartOf="@+id/addTransButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/showTransButton"
+        android:id="@+id/addTransButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:background="@color/transparent"
-        android:drawableTop="@drawable/paid"
-        android:fontFamily="@font/poppins"
+        android:drawableTop="@drawable/plus1"
+        android:fontFamily="@font/poppins_medium"
         android:padding="5dp"
-        android:text="@string/view_transaction"
+        android:text="@string/add_transaction"
         android:textColor="@color/black"
-        android:textSize="11sp"
-        android:textStyle="bold"
+
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/resetButton"
         app:layout_constraintHorizontal_bias="0.5"
@@ -103,20 +110,17 @@
         android:layout_marginBottom="10dp"
         android:background="@color/transparent"
         android:drawableTop="@drawable/reset"
-        android:fontFamily="@font/poppins"
+        android:fontFamily="@font/poppins_medium"
         android:padding="5dp"
-
         android:text="@string/reset"
 
         android:textColor="@color/black"
-        android:textSize="11sp"
-        android:textStyle="bold"
+        android:textSize="10sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/showTransButton" />
-
-
+        app:layout_constraintStart_toEndOf="@+id/addTransButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,52 +12,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:gravity="center"
-        app:cardCornerRadius="5dp"
-        android:padding="5dp"
-        app:cardElevation="3dp"
-        android:layout_margin="5dp"
-        app:contentPadding="10dp"
-        app:cardPreventCornerOverlap="true"
         android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:padding="5dp"
         app:cardBackgroundColor="@color/white"
-        >
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp"
+        app:cardPreventCornerOverlap="true"
+        app:contentPadding="10dp">
 
         <TextView
             android:id="@+id/customTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="23dp"
-            android:textColor="@color/black"
             android:layout_weight="1"
-
-            android:fontFamily="@font/poppins_medium"
-            android:textSize="18sp"
             android:background="@color/white"
 
-            android:text="Arya Gets"
-            />
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/test_string_2"
+            android:textColor="@color/black"
+
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/customTextViewAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:layout_marginStart="15dp"
-            android:textColor="@color/black"
-            android:text="Rs 2000"
-            android:fontFamily="@font/poppins_medium"
-            android:textSize="23sp"
-            android:background="@color/white"
             android:layout_gravity="end"
-            />
-
+            android:layout_marginStart="15dp"
+            android:layout_weight="0"
+            android:background="@color/white"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_medium"
+            android:maxLines="1"
+            android:text="@string/test_bal"
+            android:textColor="@color/black"
+            android:textSize="23sp" />
 
 
     </androidx.cardview.widget.CardView>
-
 
 
 </LinearLayout>

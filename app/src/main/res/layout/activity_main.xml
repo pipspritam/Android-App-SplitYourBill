@@ -9,14 +9,13 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/initialHomePage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="visible"
-        android:id="@+id/initialHomePage"
-        >
+        app:layout_constraintStart_toStartOf="parent">
 
 
         <ImageView
@@ -38,8 +37,6 @@
             android:id="@+id/t1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-
             android:padding="5dp"
             android:text="@string/nameOfApp"
             android:textColor="#9340E6"
@@ -99,25 +96,25 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/t4"
             android:padding="10dp"
             android:text="@string/create_group"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/t4" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/summeryHomePage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/background"
         android:padding="5dp"
-        android:visibility="gone"
-        android:id="@+id/summeryHomePage"
-        android:background="@drawable/background">
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/textViewTopName"
@@ -151,10 +148,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/group_name"
             android:textColor="@color/white"
             android:textSize="25sp"
-            android:fontFamily="@font/poppins_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -171,8 +168,6 @@
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
-
-
 
 
         <androidx.cardview.widget.CardView
@@ -192,7 +187,6 @@
             app:layout_constraintTop_toBottomOf="@+id/editPersonButton">
 
 
-
             <ListView
                 android:id="@+id/lv1"
                 android:layout_width="match_parent"
@@ -210,16 +204,14 @@
                 android:id="@+id/noPersonText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
                 android:layout_gravity="center"
                 android:text="@string/no_person_found"
                 android:textColor="@color/black"
-                android:visibility="gone"
+                android:textSize="20sp"
                 android:textStyle="bold"
+                android:visibility="gone"
 
                 />
-
-
 
 
         </androidx.cardview.widget.CardView>
@@ -230,10 +222,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
 
+            android:fontFamily="@font/poppins_medium"
             android:padding="10dp"
             android:text="@string/settle_up"
             android:textSize="20sp"
-            android:fontFamily="@font/poppins_medium"
             app:layout_constraintBottom_toTopOf="@+id/addTransButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -247,16 +239,17 @@
 
             android:background="@color/transparent"
             android:drawableTop="@drawable/paid"
+            android:fontFamily="@font/poppins_medium"
             android:padding="5dp"
             android:text="@string/view_transaction"
-            android:fontFamily="@font/poppins_medium"
             android:textColor="@color/black"
             android:textSize="10sp"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/addTransButton"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="SmallSp" />
 
         <Button
             android:id="@+id/addTransButton"
@@ -265,16 +258,18 @@
             android:layout_marginBottom="10dp"
             android:background="@color/transparent"
             android:drawableTop="@drawable/plus1"
+            android:enabled="false"
+            android:fontFamily="@font/poppins_medium"
             android:padding="5dp"
             android:text="@string/add_transaction"
             android:textColor="@color/black"
-            android:textSize="10sp"
 
-            android:fontFamily="@font/poppins_medium"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/resetButton"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/showTransButton" />
+            app:layout_constraintStart_toEndOf="@+id/showTransButton"
+            tools:ignore="SmallSp" />
 
         <Button
             android:id="@+id/resetButton"
@@ -283,9 +278,10 @@
             android:layout_marginBottom="10dp"
             android:background="@color/transparent"
             android:drawableTop="@drawable/reset"
+            android:fontFamily="@font/poppins_medium"
             android:padding="5dp"
             android:text="@string/reset"
-            android:fontFamily="@font/poppins_medium"
+
 
             android:textColor="@color/black"
             android:textSize="10sp"
@@ -293,11 +289,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/addTransButton" />
-
-
-
-
+            app:layout_constraintStart_toEndOf="@+id/addTransButton"
+            tools:ignore="SmallSp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

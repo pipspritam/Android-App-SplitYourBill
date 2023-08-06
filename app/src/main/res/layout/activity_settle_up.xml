@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="Settle Up"
+        android:text="@string/settle_up"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/showTransButton"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="SmallSp" />
 
     <Button
         android:id="@+id/showTransButton"
@@ -94,7 +95,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/resetButton"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/goToHomeButton" />
+        app:layout_constraintStart_toEndOf="@+id/goToHomeButton"
+        tools:ignore="SmallSp" />
 
     <Button
         android:id="@+id/resetButton"
@@ -113,9 +115,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/showTransButton" />
-
-
+        app:layout_constraintStart_toEndOf="@+id/showTransButton"
+        tools:ignore="SmallSp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

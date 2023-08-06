@@ -2,12 +2,10 @@ package com.example.splityourbill;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,10 +21,10 @@ import java.util.List;
 public class addTransDetails extends AppCompatActivity {
 
     EditText amountEditText, descEditText;
-    ListView lv;
+
     Button addTransDB, goToHomeButton;
     dataBaseHelper dataBaseHelper = new dataBaseHelper(addTransDetails.this);
-    ArrayAdapter transactionArrayAdapter;
+    //    ArrayAdapter transactionArrayAdapter;
     Spinner sp;
     TextView textViewInvolvedPeople, textViewGroupName;
 
@@ -68,12 +66,9 @@ public class addTransDetails extends AppCompatActivity {
         textViewGroupName.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
 
 
-        goToBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent backIntent = new Intent(addTransDetails.this, MainActivity.class);
-                startActivity(backIntent);
-            }
+        goToBackButton.setOnClickListener(v -> {
+            Intent backIntent = new Intent(addTransDetails.this, MainActivity.class);
+            startActivity(backIntent);
         });
 
         showTransButton.setOnClickListener(v -> {

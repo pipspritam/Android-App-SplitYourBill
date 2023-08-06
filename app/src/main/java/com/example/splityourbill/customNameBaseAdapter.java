@@ -1,5 +1,6 @@
 package com.example.splityourbill;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -16,7 +17,7 @@ public class customNameBaseAdapter extends BaseAdapter {
     LayoutInflater inflater;
 
     customNameBaseAdapter(Context context, List<person> personList) {
-        this.context=context;
+        this.context = context;
         this.personList = personList;
         inflater = LayoutInflater.from(context);
 
@@ -24,7 +25,7 @@ public class customNameBaseAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return  personList.size();
+        return personList.size();
     }
 
     @Override
@@ -37,13 +38,14 @@ public class customNameBaseAdapter extends BaseAdapter {
         return 0;
     }
 
+    @SuppressLint({"SetTextI18n", "ViewHolder", "InflateParams"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = inflater.inflate(R.layout.activity_custom_name_list, null);
         TextView textView = convertView.findViewById(R.id.customTextView);
         TextView textView1 = convertView.findViewById(R.id.customTextViewAmount);
-        textView1.setText("Rs "+((new String(String.valueOf(Math.abs(Math.round(personList.get(position).getBalance()*100.0)/100.0))))));
-        if(personList.get(position).getBalance()<0) {
+        textView1.setText("Rs " + ((Math.abs(Math.round(personList.get(position).getBalance() * 100.0) / 100.0))));
+        if (personList.get(position).getBalance() < 0) {
             textView.setText(personList.get(position).getName() + " owes ");
             textView1.setTextColor(Color.parseColor("#FF0000"));
         }

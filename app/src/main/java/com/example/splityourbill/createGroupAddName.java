@@ -49,7 +49,8 @@ public class createGroupAddName extends AppCompatActivity {
 
         }
 
-        if(dataBaseHelper.getEveryGroup().size() == 1){
+
+        if (dataBaseHelper.getEveryGroup().size() == 1) {
             groupNameTextView.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
             addGroupButton.setVisibility(View.GONE);
             groupEditText.setVisibility(View.GONE);
@@ -108,8 +109,8 @@ public class createGroupAddName extends AppCompatActivity {
 
 
         goToHomeButton.setOnClickListener(v -> {
-                Intent homeIntent = new Intent(createGroupAddName.this, MainActivity.class);
-                startActivity(homeIntent);
+            Intent homeIntent = new Intent(createGroupAddName.this, MainActivity.class);
+            startActivity(homeIntent);
         });
 
         resetButton.setOnClickListener(v -> {

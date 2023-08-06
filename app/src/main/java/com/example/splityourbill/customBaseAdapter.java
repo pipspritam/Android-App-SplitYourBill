@@ -1,7 +1,6 @@
 package com.example.splityourbill;
 
 import android.content.Context;
-import android.content.IntentFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ public class customBaseAdapter extends BaseAdapter {
     LayoutInflater inflater;
 
     customBaseAdapter(Context context, List<TransactionModel> transactionModels) {
-        this.context=context;
+        this.context = context;
         this.transactionModel = transactionModels;
         inflater = LayoutInflater.from(context);
     }
@@ -41,8 +40,8 @@ public class customBaseAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.activity_custom_list, null);
         TextView textView = convertView.findViewById(R.id.customTextView);
         TextView textView1 = convertView.findViewById(R.id.customTextViewAmount);
-        textView.setText(transactionModel.get(position).getPayee()+ " Paid For " + transactionModel.get(position).getDescription()+"\n"+transactionModel.get(position).getInvolve());
-        textView1.setText("Rs "+((new String(String.valueOf(transactionModel.get(position).getAmount())))));
+        textView.setText(transactionModel.get(position).getPayee() + " Paid For " + transactionModel.get(position).getDescription() + "\n" + transactionModel.get(position).getInvolve());
+        textView1.setText("Rs " + ((String.valueOf(transactionModel.get(position).getAmount()))));
         return convertView;
     }
 }

@@ -26,6 +26,13 @@
     <string name="view_transaction">View Transaction</string>
     <string name="group_name">Group Name</string>
     <string name="no_person_found">No Person Found!!</string>
+    <string name="dollar">$</string>
+    <string name="new_group">New Group</string>
+    <string name="enter_group_name">Enter Group Name</string>
+    <string name="create_group_1">Create Group</string>
+    <string name="test_string">Arya Paid Food \nPritam | Arya | Rimi | Anti | Pritam | Arya | Rimi | Anti</string>
+    <string name="test_bal">Rs 200000</string>
+    <string name="test_string_2">Arya Gets</string>
 
 
 </resources>

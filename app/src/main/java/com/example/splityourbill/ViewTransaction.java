@@ -14,7 +14,6 @@ public class ViewTransaction extends AppCompatActivity {
     ListView lv1;
     Button goToHomeButton;
     ImageButton goToBackButton;
-//    ArrayAdapter transactionArrayAdapter;
     Button settleUpButton, addTransButton;
     TextView textViewGroupName;
 

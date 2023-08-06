@@ -19,41 +19,25 @@ public class TransactionModel {
     @Override
     public String toString() {
 
-        return payee+" paid Rs "+ amount+"\nCategory: " + description +" \nSplit Among: "+involve;
+        return payee + " paid Rs " + amount + "\nCategory: " + description + " \nSplit Among: " + involve;
     }
 
     public String getPayee() {
         return payee;
     }
 
-    public void setPayee(String payee) {
-        this.payee = payee;
-    }
-
     public double getAmount() {
         return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getInvolve() {
-
 
 
         return involve;
     }
 
-    public void setInvolve(String involve) {
-        this.involve = involve;
-    }
 }

@@ -68,8 +68,8 @@ public class SettleUp extends AppCompatActivity {
         List<String> results_list = new ArrayList<>();
         sortPeopleByBalance(listOfPerson);
 
-        for(int i=0;i<n;i++){
-            if(listOfPerson.get(i).balance == 0){
+        for (int i = 0; i < n; i++) {
+            if (listOfPerson.get(i).balance == 0) {
                 listOfPerson.remove(i);
                 n = listOfPerson.size();
             }
@@ -81,19 +81,19 @@ public class SettleUp extends AppCompatActivity {
             sortPeopleByBalance(listOfPerson);
             if ((listOfPerson.get(0).balance + listOfPerson.get(n - 1).balance) == 0) {
                 if (listOfPerson.get(0).balance != 0) {
-                    results_list.add(listOfPerson.get(0).name + " pays " + listOfPerson.get(n - 1).name + " Rs " + Math.round(listOfPerson.get(n - 1).balance*100.0)/100.0 + " \n");
+                    results_list.add(listOfPerson.get(0).name + " pays " + listOfPerson.get(n - 1).name + " Rs " + Math.round(listOfPerson.get(n - 1).balance * 100.0) / 100.0 + " \n");
                 }
                 listOfPerson.remove(0);
                 n = listOfPerson.size();
                 listOfPerson.remove(n - 1);
                 n = listOfPerson.size();
             } else if ((listOfPerson.get(0).balance + listOfPerson.get(n - 1).balance) > 0) {
-                results_list.add(listOfPerson.get(0).name + " pays " + listOfPerson.get(n - 1).name + " Rs " + Math.round(Math.abs(listOfPerson.get(0).balance)*100.0)/100.0);
+                results_list.add(listOfPerson.get(0).name + " pays " + listOfPerson.get(n - 1).name + " Rs " + Math.round(Math.abs(listOfPerson.get(0).balance) * 100.0) / 100.0);
                 listOfPerson.get(n - 1).balance = listOfPerson.get(n - 1).balance + listOfPerson.get(0).balance;
                 listOfPerson.remove(0);
                 n = listOfPerson.size();
             } else {
-                results_list.add(listOfPerson.get(0).name + " pays " + listOfPerson.get(n - 1).name + " Rs " + Math.round(listOfPerson.get(n - 1).balance*100.0)/100.0);
+                results_list.add(listOfPerson.get(0).name + " pays " + listOfPerson.get(n - 1).name + " Rs " + Math.round(listOfPerson.get(n - 1).balance * 100.0) / 100.0);
                 listOfPerson.get(0).balance = listOfPerson.get(n - 1).balance + listOfPerson.get(0).balance;
                 listOfPerson.remove(n - 1);
                 n = listOfPerson.size();

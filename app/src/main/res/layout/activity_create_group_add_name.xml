@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="New Group"
+        android:text="@string/new_group"
         android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,7 @@
         android:background="@color/transparent"
         android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         android:gravity="center"
-        android:hint="Enter Group Name"
+        android:hint="@string/enter_group_name"
         android:importantForAutofill="no"
         android:inputType="textCapWords"
         android:textSize="25sp"
@@ -48,7 +48,7 @@
         android:id="@+id/addGroupNameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Group"
+        android:text="@string/create_group_1"
         app:layout_constraintBottom_toTopOf="@+id/goToAddTrans"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -76,6 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:autofillHints=""
         android:background="@color/transparent"
         android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         android:ems="10"
@@ -105,25 +106,12 @@
         app:layout_constraintVertical_bias="0.5" />
 
 
-    <!--        <ListView-->
-    <!--            android:id="@+id/listViewAddLayout"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="240dp"-->
-    <!--            android:layout_marginBottom="50dp"-->
-    <!--            android:dividerHeight="1dp"-->
-    <!--            android:horizontalSpacing="3dp"-->
-    <!--            android:scrollingCache="true"-->
-    <!--            android:smoothScrollbar="true"-->
-    <!--            android:stretchMode="columnWidth"-->
-    <!--            android:verticalSpacing="3dp"-->
-    <!--            android:visibility="gone" />-->
-    <!--        />-->
-
     <ListView
         android:id="@+id/listViewAddLayout"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginBottom="10dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/goToAddTrans"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -145,7 +133,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/goToAddTrans"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="SmallSp" />
 
     <Button
         android:id="@+id/goToAddTrans"
@@ -154,6 +143,7 @@
         android:layout_marginBottom="10dp"
         android:background="@color/transparent"
         android:drawableTop="@drawable/plus1"
+        android:enabled="false"
         android:fontFamily="@font/poppins_medium"
         android:padding="5dp"
         android:text="@string/add_transaction"
@@ -163,7 +153,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/resetButton"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/goToHomeButton" />
+        app:layout_constraintStart_toEndOf="@+id/goToHomeButton"
+        tools:ignore="SmallSp" />
 
     <Button
         android:id="@+id/resetButton"
@@ -182,9 +173,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/goToAddTrans" />
-
-
+        app:layout_constraintStart_toEndOf="@+id/goToAddTrans"
+        tools:ignore="SmallSp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,14 +14,12 @@ public class person {
     @NonNull
     @Override
     public String toString() {
-        if(balance>0) {
-            return name+ " gets " + Math.round(balance*100.0)/100.0;
-        }
-        else if(balance<0) {
-            return name+ " owes " + Math.round(Math.abs(balance)*100.0)/100.0;
-        }
-        else {
-            return name+ " is settled up";
+        if (balance > 0) {
+            return name + " gets " + Math.round(balance * 100.0) / 100.0;
+        } else if (balance < 0) {
+            return name + " owes " + Math.round(Math.abs(balance) * 100.0) / 100.0;
+        } else {
+            return name + " is settled up";
         }
     }
 
@@ -37,7 +35,4 @@ public class person {
         return balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
 }

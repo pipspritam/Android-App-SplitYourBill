@@ -83,16 +83,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:layout_marginBottom="10dp"
 
                 android:orientation="horizontal">
 
@@ -101,10 +101,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".4"
-                    android:text="@string/payee"
                     android:fontFamily="@font/poppins_medium"
-                    android:paddingLeft="10dp"
-                    android:textSize="20sp" />
+                    android:paddingStart="10dp"
+                    android:text="@string/payee"
+                    android:textSize="20sp"
+                    tools:ignore="NestedWeights,RtlSymmetry" />
 
 
                 <Spinner
@@ -121,9 +122,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
 
@@ -131,48 +132,48 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".4"
-                    android:paddingStart="10dp"
-                    android:textSize="20sp"
-                    android:text="@string/amount"
                     android:fontFamily="@font/poppins_medium"
-                    />
+                    android:paddingStart="10dp"
+                    android:text="@string/amount"
+                    android:textSize="20sp"
+                    tools:ignore="NestedWeights,RtlSymmetry" />
 
                 <EditText
                     android:id="@+id/addPayeeAmount"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".6"
-                    android:padding="10dp"
-                    android:hint="$"
-                    android:fontFamily="@font/poppins_medium"
+                    android:autofillHints=""
                     android:background="@color/transparent"
+                    android:fontFamily="@font/poppins_medium"
+                    android:hint="@string/dollar"
                     android:inputType="numberDecimal"
+                    android:padding="10dp"
                     android:textSize="20sp" />
 
 
             </LinearLayout>
 
 
-
             <EditText
                 android:id="@+id/addPayeeDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/enter_description"
-                android:padding="10dp"
-                android:textSize="20sp"
                 android:layout_marginBottom="10dp"
+                android:autofillHints=""
                 android:background="@color/transparent"
                 android:fontFamily="@font/poppins_medium"
-                android:autofillHints="" />
+                android:hint="@string/enter_description"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textViewInvolved"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/person_involved"
                 android:fontFamily="@font/poppins_medium"
+                android:hint="@string/person_involved"
                 android:padding="5dp"
                 android:textSize="20sp"
                 app:drawableRightCompat="@android:drawable/arrow_down_float" />
@@ -181,12 +182,12 @@
                 android:id="@+id/addTransToDB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppins"
                 android:padding="5dp"
                 android:text="@string/add_transaction"
-                android:layout_gravity="center_horizontal"
-                android:textSize="20sp"
-                android:fontFamily="@font/poppins" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -210,7 +211,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/showTransButton"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="SmallSp" />
 
     <Button
         android:id="@+id/showTransButton"
@@ -228,7 +230,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/goToSettleUp"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/goToHomeButton" />
+        app:layout_constraintStart_toEndOf="@+id/goToHomeButton"
+        tools:ignore="SmallSp" />
 
     <Button
         android:id="@+id/goToSettleUp"
@@ -248,9 +251,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/showTransButton" />
-
-
+        app:layout_constraintStart_toEndOf="@+id/showTransButton"
+        tools:ignore="SmallSp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

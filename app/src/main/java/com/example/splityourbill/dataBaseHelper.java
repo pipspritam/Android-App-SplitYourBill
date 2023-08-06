@@ -26,6 +26,7 @@ public class dataBaseHelper extends SQLiteOpenHelper {
 
     public static final String groupName = "GROUPNAME";
     public static final String gName = "GNAME";
+
     public dataBaseHelper(@Nullable Context context) {
         super(context, "splitBillDataBase", null, 1);
     }
@@ -184,8 +185,6 @@ public class dataBaseHelper extends SQLiteOpenHelper {
         String upBalance = "UPDATE PERSON SET BALANCE = " + exBalance + " WHERE NAME = '" + name + "'";
         db.execSQL(upBalance);
     }
-
-
 
 
 }

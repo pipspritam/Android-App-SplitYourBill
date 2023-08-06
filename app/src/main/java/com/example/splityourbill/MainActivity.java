@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
             noPersonText.setVisibility(View.VISIBLE);
 
         }
+        if (numberOfPerson >= 2) {
+            addTransButton.setEnabled(true);
+        }
 
         if (dataBaseHelper.getEveryGroup().size() == 1) {
             initialHomePage.setVisibility(View.GONE);
@@ -129,7 +132,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finishAffinity();
-        System.exit(0);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation").setMessage("Are you sure you want to exit?").setPositiveButton("Yes", (dialog, which) -> {
+            finishAffinity();
+            System.exit(0);
+        }).setNegativeButton("No", (dialog, which) -> {
+            // Do nothing or handle the cancel action
+        }).show();
+
     }
 }

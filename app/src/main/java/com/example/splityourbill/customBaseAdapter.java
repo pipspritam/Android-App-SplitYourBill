@@ -8,40 +8,53 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Locale;
 
 public class customBaseAdapter extends BaseAdapter {
-    Context context;
-    List<TransactionModel> transactionModel;
-    LayoutInflater inflater;
+    private final List<TransactionModel> transactionModels;
+    private final LayoutInflater inflater;
 
     customBaseAdapter(Context context, List<TransactionModel> transactionModels) {
-        this.context = context;
-        this.transactionModel = transactionModels;
-        inflater = LayoutInflater.from(context);
+        this.transactionModels = transactionModels;
+        this.inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return transactionModel.size();
+        return transactionModels.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
+    public TransactionModel getItem(int position) {
+        return transactionModels.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
+    }
+
+    static class ViewHolder {
+        TextView textView;
+        TextView textViewAmount;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = inflater.inflate(R.layout.activity_custom_list, null);
-        TextView textView = convertView.findViewById(R.id.customTextView);
-        TextView textView1 = convertView.findViewById(R.id.customTextViewAmount);
-        textView.setText(transactionModel.get(position).getPayee() + " Paid For " + transactionModel.get(position).getDescription() + "\n" + transactionModel.get(position).getInvolve());
-        textView1.setText("Rs " + ((String.valueOf(transactionModel.get(position).getAmount()))));
+        ViewHolder holder;
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.activity_custom_list, parent, false);
+            holder = new ViewHolder();
+            holder.textView = convertView.findViewById(R.id.customTextView);
+            holder.textViewAmount = convertView.findViewById(R.id.customTextViewAmount);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+
+        TransactionModel item = getItem(position);
+        holder.textView.setText(String.format(Locale.getDefault(), "%s Paid For %s\n%s", item.getPayee(), item.getDescription(), item.getInvolve()));
+        holder.textViewAmount.setText(String.format(Locale.getDefault(), "Rs %.2f", item.getAmount()));
         return convertView;
     }
 }

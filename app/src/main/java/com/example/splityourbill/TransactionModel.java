@@ -18,8 +18,7 @@ public class TransactionModel {
     @NonNull
     @Override
     public String toString() {
-
-        return payee + " paid Rs " + amount + "\nCategory: " + description + " \nSplit Among: " + involve;
+        return String.format(java.util.Locale.getDefault(), "%s paid Rs %.2f\nCategory: %s\nSplit Among: %s", payee, amount, description, involve);
     }
 
     public String getPayee() {

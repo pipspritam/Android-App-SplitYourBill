@@ -1,15 +1,72 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+# Built application files
+*.apk
+*.ap_
+*.aab
+*.dex
+
+# Java class files
+*.class
+
+# Generated build files
+build/
+app/build/
+bin/
+gen/
+out/
+captures/
+.navigation/
+
+# Gradle files
+.gradle/
+reports/
+
+# Local configuration files
 local.properties
+.bundle/
+
+# IntelliJ / Android Studio
+*.iml
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/deploymentTargetSelector.xml
+.idea/AndroidProjectSystem.xml
+.idea/migrations.xml
+.idea/runConfigurations.xml
+.idea/markdown.xml
+.idea/shelf/
+.idea/sonarlint/
+.idea/inspectionProfiles/
+
+# Keystores and signing keys
+*.jks
+*.keystore
+*.key
+*.p12
+
+# ProGuard / R8 mapping files
+mapping.txt
+
+# Native builds
+.externalNativeBuild/
+.cxx/
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+
+# Log and Profiler files
+*.log
+*.hprof
+
+# Kotlin
+.kotlin

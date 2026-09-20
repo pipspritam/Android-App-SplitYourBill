@@ -13,16 +13,17 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 public class createGroupAddName extends AppCompatActivity {
 
-    EditText nameEditText, groupEditText;
-    Button addButton, startTrans, addGroupButton;
-    ListView lv;
-    TextView groupNameTextView, addNameTextView;
-
-    dataBaseHelper dataBaseHelper = new dataBaseHelper(createGroupAddName.this);
-    ArrayAdapter personArrayAdapter;
-    Button goToHomeButton, resetButton;
+    private EditText nameEditText, groupEditText;
+    private Button addButton, startTrans, addGroupButton;
+    private ListView lv;
+    private TextView groupNameTextView, addNameTextView;
+    private final dataBaseHelper dbHelper = new dataBaseHelper(this);
+    private ArrayAdapter<person> personArrayAdapter;
+    private Button goToHomeButton, resetButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,27 +32,23 @@ public class createGroupAddName extends AppCompatActivity {
 
         nameEditText = findViewById(R.id.addName);
         addNameTextView = findViewById(R.id.addNameTitle);
-
         goToHomeButton = findViewById(R.id.goToHomeButton);
         resetButton = findViewById(R.id.resetButton);
-
         addButton = findViewById(R.id.addNameButton);
         lv = findViewById(R.id.listViewAddLayout);
         startTrans = findViewById(R.id.goToAddTrans);
-
         groupEditText = findViewById(R.id.addGroupNameEditText);
         addGroupButton = findViewById(R.id.addGroupNameButton);
         groupNameTextView = findViewById(R.id.addGroupName);
 
-        ShowPerson(dataBaseHelper);
-        if (dataBaseHelper.getEveryOne().size() >= 2) {
+        showPerson();
+        if (dbHelper.getEveryOne().size() >= 2) {
             startTrans.setEnabled(true);
-
         }
 
-
-        if (dataBaseHelper.getEveryGroup().size() == 1) {
-            groupNameTextView.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
+        List<Group> groups = dbHelper.getEveryGroup();
+        if (groups.size() == 1) {
+            groupNameTextView.setText(groups.get(0).getGroupName());
             addGroupButton.setVisibility(View.GONE);
             groupEditText.setVisibility(View.GONE);
             nameEditText.setVisibility(View.VISIBLE);
@@ -60,46 +57,49 @@ public class createGroupAddName extends AppCompatActivity {
             addNameTextView.setVisibility(View.VISIBLE);
         }
 
-
         addGroupButton.setOnClickListener(v -> {
-            String groupName = groupEditText.getText().toString();
-            groupName = groupName.trim();
+            String groupName = groupEditText.getText().toString().trim();
             if (groupName.isEmpty()) {
                 Toast.makeText(createGroupAddName.this, "Enter a valid Group Name", Toast.LENGTH_SHORT).show();
                 groupEditText.setText(null);
             } else {
                 Group group = new Group(groupName);
-                dataBaseHelper.addOneGroup(group);
-                Toast.makeText(createGroupAddName.this, "Group Added", Toast.LENGTH_SHORT).show();
-                groupNameTextView.setText(groupName);
-                groupEditText.setText(null);
-                //reload activity
-                Intent intent = getIntent();
-                finish();
-                startActivity(intent);
-
+                if (dbHelper.addOneGroup(group)) {
+                    Toast.makeText(createGroupAddName.this, "Group Added", Toast.LENGTH_SHORT).show();
+                    groupNameTextView.setText(groupName);
+                    groupEditText.setText(null);
+                    addGroupButton.setVisibility(View.GONE);
+                    groupEditText.setVisibility(View.GONE);
+                    nameEditText.setVisibility(View.VISIBLE);
+                    addButton.setVisibility(View.VISIBLE);
+                    lv.setVisibility(View.VISIBLE);
+                    addNameTextView.setVisibility(View.VISIBLE);
+                } else {
+                    Toast.makeText(createGroupAddName.this, "Failed to create group", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-
         addButton.setOnClickListener(v -> {
-            person person;
-            String nameinputCheck = nameEditText.getText().toString();
-            nameinputCheck = nameinputCheck.trim();
-            if (nameinputCheck.isEmpty()) {
+            String nameInput = nameEditText.getText().toString().trim();
+            if (nameInput.isEmpty()) {
                 Toast.makeText(createGroupAddName.this, "Enter a valid name", Toast.LENGTH_SHORT).show();
                 nameEditText.setText(null);
-            } else {
-                person = new person(nameEditText.getText().toString(), 0);
-                dataBaseHelper dataBaseHelper = new dataBaseHelper(createGroupAddName.this);
-                dataBaseHelper.addOne(person);
-                ShowPerson(dataBaseHelper);
-                Toast.makeText(createGroupAddName.this, "Name Added", Toast.LENGTH_SHORT).show();
-                nameEditText.setText(null);
-
+                return;
             }
 
-
+            person newPerson = new person(nameInput, 0);
+            boolean inserted = dbHelper.addOne(newPerson);
+            if (inserted) {
+                showPerson();
+                Toast.makeText(createGroupAddName.this, "Name Added", Toast.LENGTH_SHORT).show();
+                nameEditText.setText(null);
+                if (dbHelper.getEveryOne().size() >= 2) {
+                    startTrans.setEnabled(true);
+                }
+            } else {
+                Toast.makeText(createGroupAddName.this, "Person with this name already exists", Toast.LENGTH_SHORT).show();
+            }
         });
 
         startTrans.setOnClickListener(v -> {
@@ -107,31 +107,23 @@ public class createGroupAddName extends AppCompatActivity {
             startActivity(mainIntent);
         });
 
-
-        goToHomeButton.setOnClickListener(v -> {
-            Intent homeIntent = new Intent(createGroupAddName.this, MainActivity.class);
-            startActivity(homeIntent);
-        });
+        goToHomeButton.setOnClickListener(v -> finish());
 
         resetButton.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Confirmation")
+            new AlertDialog.Builder(this)
+                    .setTitle("Confirmation")
                     .setMessage("Are you sure you want to reset?")
                     .setPositiveButton("Yes", (dialog, which) -> {
-                        dataBaseHelper.clearDatabase();
-                        Intent homeIntent = new Intent(createGroupAddName.this, MainActivity.class);
-                        startActivity(homeIntent);
-
+                        dbHelper.clearDatabase();
+                        finish();
                     })
-                    .setNegativeButton("No", (dialog, which) -> {
-                        // Do nothing or handle the cancel action
-                    })
+                    .setNegativeButton("No", null)
                     .show();
         });
     }
 
-    private void ShowPerson(dataBaseHelper dataBaseHelper) {
-        personArrayAdapter = new ArrayAdapter<>(createGroupAddName.this, android.R.layout.simple_list_item_1, dataBaseHelper.getEveryOne());
+    private void showPerson() {
+        personArrayAdapter = new ArrayAdapter<>(createGroupAddName.this, android.R.layout.simple_list_item_1, dbHelper.getEveryOne());
         lv.setAdapter(personArrayAdapter);
     }
 }

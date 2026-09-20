@@ -14,40 +14,26 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-
 public class addTransDetails extends AppCompatActivity {
 
-    EditText amountEditText, descEditText;
-
-    Button addTransDB, goToHomeButton;
-    dataBaseHelper dataBaseHelper = new dataBaseHelper(addTransDetails.this);
-    //    ArrayAdapter transactionArrayAdapter;
-    Spinner sp;
-    TextView textViewInvolvedPeople, textViewGroupName;
-
-    Button showTransButton, settleUpButton;
-
-    ImageButton goToBackButton;
-    boolean[] selectedPerson;
-    ArrayList<Integer> langList = new ArrayList<>();
+    private EditText amountEditText, descEditText;
+    private Button addTransDB, goToHomeButton, showTransButton, settleUpButton;
+    private final dataBaseHelper dbHelper = new dataBaseHelper(this);
+    private Spinner sp;
+    private TextView textViewInvolvedPeople, textViewGroupName;
+    private ImageButton goToBackButton;
+    private boolean[] selectedPerson;
+    private final ArrayList<Integer> selectedPersonIndices = new ArrayList<>();
 
     public String[] getNameList() {
-        List<String> nn = new ArrayList<>();
-        List<person> pl;
-        pl = dataBaseHelper.getEveryOne();
-        try {
-            for (person element : pl) {
-                nn.add(element.name);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String[] names = new String[nn.size()];
-        for (int i = 0; i < nn.size(); i++) {
-            names[i] = nn.get(i);
+        List<person> pl = dbHelper.getEveryOne();
+        String[] names = new String[pl.size()];
+        for (int i = 0; i < pl.size(); i++) {
+            names[i] = pl.get(i).getName();
         }
         return names;
     }
@@ -63,13 +49,15 @@ public class addTransDetails extends AppCompatActivity {
         goToBackButton = findViewById(R.id.goToBackButton);
         textViewGroupName = findViewById(R.id.viewGroupName);
 
-        textViewGroupName.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
+        List<Group> groups = dbHelper.getEveryGroup();
+        if (!groups.isEmpty()) {
+            textViewGroupName.setText(groups.get(0).getGroupName());
+        } else {
+            textViewGroupName.setText(R.string.group_name);
+        }
 
-
-        goToBackButton.setOnClickListener(v -> {
-            Intent backIntent = new Intent(addTransDetails.this, MainActivity.class);
-            startActivity(backIntent);
-        });
+        goToBackButton.setOnClickListener(v -> finish());
+        goToHomeButton.setOnClickListener(v -> finish());
 
         showTransButton.setOnClickListener(v -> {
             Intent showTransIntent = new Intent(addTransDetails.this, ViewTransaction.class);
@@ -77,115 +65,124 @@ public class addTransDetails extends AppCompatActivity {
         });
 
         settleUpButton.setOnClickListener(v -> {
-            Intent backIntent = new Intent(addTransDetails.this, SettleUp.class);
-            startActivity(backIntent);
+            Intent settleUpIntent = new Intent(addTransDetails.this, SettleUp.class);
+            startActivity(settleUpIntent);
         });
-
-
-        goToHomeButton.setOnClickListener(v -> {
-            Intent homeIntent = new Intent(addTransDetails.this, MainActivity.class);
-            startActivity(homeIntent);
-        });
-
 
         textViewInvolvedPeople = findViewById(R.id.textViewInvolved);
-        selectedPerson = new boolean[getNameList().length];
+        String[] names = getNameList();
+        selectedPerson = new boolean[names.length];
+
         textViewInvolvedPeople.setOnClickListener(v -> {
+            String[] currentNames = getNameList();
+            if (selectedPerson == null || selectedPerson.length != currentNames.length) {
+                selectedPerson = new boolean[currentNames.length];
+            }
+
             AlertDialog.Builder builder = new AlertDialog.Builder(addTransDetails.this);
             builder.setTitle("Select Involved Person");
             builder.setCancelable(false);
-            builder.setMultiChoiceItems(getNameList(), selectedPerson, (dialog, which, isChecked) -> {
+            builder.setMultiChoiceItems(currentNames, selectedPerson, (dialog, which, isChecked) -> {
                 if (isChecked) {
-                    langList.add(which);
-                    Collections.sort(langList);
+                    if (!selectedPersonIndices.contains(which)) {
+                        selectedPersonIndices.add(which);
+                        Collections.sort(selectedPersonIndices);
+                    }
                 } else {
-                    langList.remove(Integer.valueOf(which));
+                    selectedPersonIndices.remove(Integer.valueOf(which));
                 }
             });
             builder.setPositiveButton("Ok", (dialogInterface, i) -> updateSelectedItems());
-
             builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-
             builder.setNeutralButton("Select All", (dialog, which) -> {
                 for (int j = 0; j < selectedPerson.length; j++) {
                     selectedPerson[j] = true;
-                    if (!langList.contains(j)) {
-                        langList.add(j);
+                    if (!selectedPersonIndices.contains(j)) {
+                        selectedPersonIndices.add(j);
                     }
                 }
+                Collections.sort(selectedPersonIndices);
                 updateSelectedItems();
             });
-
             builder.show();
-
         });
 
         amountEditText = findViewById(R.id.addPayeeAmount);
         descEditText = findViewById(R.id.addPayeeDesc);
-//        lv = findViewById(R.id.transViewAddLayout);
-
         addTransDB = findViewById(R.id.addTransToDB);
 
         sp = findViewById(R.id.payeeInput);
-        ArrayAdapter<String> adapter_options = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, getNameList());
-        sp.setAdapter(adapter_options);
-
-
-//        ShowTrans(dataBaseHelper);
-
+        ArrayAdapter<String> adapterOptions = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, names);
+        sp.setAdapter(adapterOptions);
 
         addTransDB.setOnClickListener(v -> {
-            TransactionModel transactionModel;
-            if (amountEditText.getText().toString().equals("") || descEditText.getText().toString().equals("") || textViewInvolvedPeople.getText().toString().equals("")) {
+            String amountStr = amountEditText.getText().toString().trim();
+            String desc = descEditText.getText().toString().trim();
+            String involvedStr = textViewInvolvedPeople.getText().toString().trim();
+
+            if (amountStr.isEmpty() || desc.isEmpty() || involvedStr.isEmpty()) {
                 Toast.makeText(addTransDetails.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
                 return;
             }
-            transactionModel = new TransactionModel(sp.getSelectedItem().toString(), Double.parseDouble(amountEditText.getText().toString()), descEditText.getText().toString(), textViewInvolvedPeople.getText().toString());
 
-            dataBaseHelper dataBaseHelper = new dataBaseHelper(addTransDetails.this);
-            double totalAmount = Double.parseDouble(amountEditText.getText().toString());
+            if (sp.getSelectedItem() == null) {
+                Toast.makeText(addTransDetails.this, "Please select a payee", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            double totalAmount;
+            try {
+                totalAmount = Double.parseDouble(amountStr);
+                if (totalAmount <= 0) {
+                    Toast.makeText(addTransDetails.this, "Please enter a valid positive amount", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                Toast.makeText(addTransDetails.this, "Invalid amount format", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             String payeeVar = sp.getSelectedItem().toString();
-            String[] involvedPerson = textViewInvolvedPeople.getText().toString().split(",");
+            String[] involvedPerson = involvedStr.split(",");
             int len = involvedPerson.length;
+            if (len == 0) {
+                return;
+            }
             double avg = totalAmount / len;
 
             for (String s : involvedPerson) {
-                dataBaseHelper.updateBalance(s, avg * (-1));
+                String trimmedName = s.trim();
+                if (!trimmedName.isEmpty()) {
+                    dbHelper.updateBalance(trimmedName, -avg);
+                }
             }
-            dataBaseHelper.updateBalance(payeeVar, totalAmount);
+            dbHelper.updateBalance(payeeVar, totalAmount);
 
+            TransactionModel transactionModel = new TransactionModel(payeeVar, totalAmount, desc, involvedStr);
+            dbHelper.addOneTrans(transactionModel);
 
-            dataBaseHelper.addOneTrans(transactionModel);
             Toast.makeText(addTransDetails.this, "Transaction Added", Toast.LENGTH_SHORT).show();
             amountEditText.setText(null);
             descEditText.setText(null);
             textViewInvolvedPeople.setText("");
 
-//            ShowTrans(dataBaseHelper);
-
+            selectedPersonIndices.clear();
+            if (selectedPerson != null) {
+                Arrays.fill(selectedPerson, false);
+            }
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent backIntent = new Intent(addTransDetails.this, MainActivity.class);
-        startActivity(backIntent);
-        finish();
-    }
-
-
-//    private void ShowTrans(dataBaseHelper dataBaseHelper) {
-//        transactionArrayAdapter = new ArrayAdapter<>(addTransDetails.this, android.R.layout.simple_list_item_1, dataBaseHelper.getEveryTrans());
-//        lv.setAdapter(transactionArrayAdapter);
-//    }
-
     private void updateSelectedItems() {
+        String[] currentNames = getNameList();
         StringBuilder stringBuilder = new StringBuilder();
-        for (int j = 0; j < langList.size(); j++) {
-            stringBuilder.append(getNameList()[langList.get(j)]);
-            if (j != langList.size() - 1) {
-                stringBuilder.append(",");
+        for (int j = 0; j < selectedPersonIndices.size(); j++) {
+            int index = selectedPersonIndices.get(j);
+            if (index >= 0 && index < currentNames.length) {
+                stringBuilder.append(currentNames[index]);
+                if (j != selectedPersonIndices.size() - 1) {
+                    stringBuilder.append(",");
+                }
             }
         }
         textViewInvolvedPeople.setText(stringBuilder.toString());

@@ -1,6 +1,5 @@
 package com.example.splityourbill;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -31,20 +30,16 @@ public class dataBaseHelper extends SQLiteOpenHelper {
         super(context, "splitBillDataBase", null, 1);
     }
 
-    @SuppressLint("SQLiteString")
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-        String createTableStatementPerson = "CREATE TABLE " + personT + " ( " + name + " STRING PRIMARY KEY, " + balance + " DOUBLE(10.2))";
+        String createTableStatementPerson = "CREATE TABLE " + personT + " ( " + name + " TEXT PRIMARY KEY, " + balance + " REAL)";
         db.execSQL(createTableStatementPerson);
 
-        String createTableTransaction = "CREATE TABLE " + transactionT + " (" + payee + " STRING, " + amount + " DOUBLE(10.2), " + description + " STRING, " + involved + " STRING)";
+        String createTableTransaction = "CREATE TABLE " + transactionT + " (" + payee + " TEXT, " + amount + " REAL, " + description + " TEXT, " + involved + " TEXT)";
         db.execSQL(createTableTransaction);
 
-
-        String createTableStatementGroupName = "CREATE TABLE " + groupName + " (" + gName + " STRING PRIMARY KEY)";
+        String createTableStatementGroupName = "CREATE TABLE " + groupName + " (" + gName + " TEXT PRIMARY KEY)";
         db.execSQL(createTableStatementGroupName);
-
     }
 
     @Override
@@ -55,32 +50,23 @@ public class dataBaseHelper extends SQLiteOpenHelper {
     public boolean addOneGroup(Group group) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-
         cv.put(gName, group.getGroupName());
-
         long insert = db.insert(groupName, null, cv);
-
         return insert != -1;
-
     }
-
 
     public List<Group> getEveryGroup() {
         List<Group> returnList = new ArrayList<>();
-        String quarryString = "SELECT * FROM " + groupName;
+        String queryString = "SELECT * FROM " + groupName;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(quarryString, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                String nameP = cursor.getString(0);
-                Group newP = new Group(nameP);
-                returnList.add(newP);
-            } while (cursor.moveToNext());
-        } else {
-            cursor.close();
-            db.close();
-            return returnList;
+        try (Cursor cursor = db.rawQuery(queryString, null)) {
+            if (cursor.moveToFirst()) {
+                do {
+                    String nameP = cursor.getString(0);
+                    Group newP = new Group(nameP);
+                    returnList.add(newP);
+                } while (cursor.moveToNext());
+            }
         }
         return returnList;
     }
@@ -88,103 +74,83 @@ public class dataBaseHelper extends SQLiteOpenHelper {
     public boolean addOne(person person) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-
         cv.put(name, person.getName());
         cv.put(balance, person.getBalance());
-
         long insert = db.insert(personT, null, cv);
-
         return insert != -1;
-
     }
 
     public List<person> getEveryOne() {
         List<person> returnList = new ArrayList<>();
-        String quarryString = "SELECT * FROM " + personT;
+        String queryString = "SELECT * FROM " + personT;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(quarryString, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                String nameP = cursor.getString(0);
-                double balanceP = cursor.getDouble(1);
-                person newP = new person(nameP, balanceP);
-
-                returnList.add(newP);
-            } while (cursor.moveToNext());
-        } else {
-            cursor.close();
-            db.close();
-            return returnList;
+        try (Cursor cursor = db.rawQuery(queryString, null)) {
+            if (cursor.moveToFirst()) {
+                do {
+                    String nameP = cursor.getString(0);
+                    double balanceP = cursor.getDouble(1);
+                    person newP = new person(nameP, balanceP);
+                    returnList.add(newP);
+                } while (cursor.moveToNext());
+            }
         }
         return returnList;
     }
 
-
     public boolean addOneTrans(TransactionModel transactionModel) {
         SQLiteDatabase db1 = this.getWritableDatabase();
         ContentValues cv1 = new ContentValues();
-
         cv1.put(payee, transactionModel.getPayee());
         cv1.put(amount, transactionModel.getAmount());
         cv1.put(description, transactionModel.getDescription());
         cv1.put(involved, transactionModel.getInvolve());
-
         long insert = db1.insert(transactionT, null, cv1);
-
         return insert != -1;
     }
 
     public List<TransactionModel> getEveryTrans() {
         List<TransactionModel> returnList = new ArrayList<>();
-        String quarryString = "SELECT * FROM " + transactionT;
+        String queryString = "SELECT * FROM " + transactionT;
         SQLiteDatabase db2 = this.getReadableDatabase();
-        Cursor cursor = db2.rawQuery(quarryString, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                String payee = cursor.getString(0);
-                double amount = cursor.getDouble(1);
-                String desc = cursor.getString(2);
-                String inv = cursor.getString(3);
-                TransactionModel transactionModel = new TransactionModel(payee, amount, desc, inv);
-
-                returnList.add(transactionModel);
-            } while (cursor.moveToNext());
-        } else {
-            cursor.close();
-            db2.close();
-            return returnList;
+        try (Cursor cursor = db2.rawQuery(queryString, null)) {
+            if (cursor.moveToFirst()) {
+                do {
+                    String payee = cursor.getString(0);
+                    double amount = cursor.getDouble(1);
+                    String desc = cursor.getString(2);
+                    String inv = cursor.getString(3);
+                    TransactionModel transactionModel = new TransactionModel(payee, amount, desc, inv);
+                    returnList.add(transactionModel);
+                } while (cursor.moveToNext());
+            }
         }
         return returnList;
     }
 
-
     public void clearDatabase() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String clearDBQuery1 = "DELETE FROM " + personT;
-        String clearDBQuery2 = "DELETE FROM " + transactionT;
-        String clearDBQuery3 = "DELETE FROM " + groupName;
-
-        db.execSQL(clearDBQuery1);
-        db.execSQL(clearDBQuery2);
-        db.execSQL(clearDBQuery3);
-    }
-
-    public void updateBalance(String name, double val) {
-        SQLiteDatabase dbr = this.getReadableDatabase();
-        String original = "SELECT * FROM PERSON WHERE NAME = '" + name + "'";
-        @SuppressLint("Recycle") Cursor cursor = dbr.rawQuery(original, null);
-        double exBalance = 0.0;
-        if (cursor.moveToFirst()) {
-            exBalance = cursor.getDouble(1);
+        db.beginTransaction();
+        try {
+            db.delete(personT, null, null);
+            db.delete(transactionT, null, null);
+            db.delete(groupName, null, null);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
         }
-        exBalance = exBalance + val;
-        dbr.close();
-        SQLiteDatabase db = this.getWritableDatabase();
-        String upBalance = "UPDATE PERSON SET BALANCE = " + exBalance + " WHERE NAME = '" + name + "'";
-        db.execSQL(upBalance);
     }
 
-
+    public void updateBalance(String personName, double val) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        double currentBalance = 0.0;
+        try (Cursor cursor = db.rawQuery("SELECT " + balance + " FROM " + personT + " WHERE " + name + " = ?", new String[]{personName})) {
+            if (cursor.moveToFirst()) {
+                currentBalance = cursor.getDouble(0);
+            }
+        }
+        double newBalance = currentBalance + val;
+        ContentValues cv = new ContentValues();
+        cv.put(balance, newBalance);
+        db.update(personT, cv, name + " = ?", new String[]{personName});
+    }
 }

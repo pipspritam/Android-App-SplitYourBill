@@ -9,15 +9,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 public class ViewTransaction extends AppCompatActivity {
 
-    ListView lv1;
-    Button goToHomeButton;
-    ImageButton goToBackButton;
-    Button settleUpButton, addTransButton;
-    TextView textViewGroupName;
-
-    dataBaseHelper dataBaseHelper = new dataBaseHelper(ViewTransaction.this);
+    private ListView lv1;
+    private Button goToHomeButton;
+    private ImageButton goToBackButton;
+    private Button settleUpButton, addTransButton;
+    private TextView textViewGroupName;
+    private final dataBaseHelper dbHelper = new dataBaseHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,46 +31,31 @@ public class ViewTransaction extends AppCompatActivity {
         addTransButton = findViewById(R.id.goToAddTrans);
         textViewGroupName = findViewById(R.id.viewGroupName);
 
-
-        textViewGroupName.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
-
+        List<Group> groups = dbHelper.getEveryGroup();
+        if (!groups.isEmpty()) {
+            textViewGroupName.setText(groups.get(0).getGroupName());
+        } else {
+            textViewGroupName.setText(R.string.group_name);
+        }
 
         settleUpButton.setOnClickListener(v -> {
-            if (v.getId() == R.id.goToSettleUp) {
-                Intent backIntent = new Intent(ViewTransaction.this, SettleUp.class);
-                startActivity(backIntent);
-            }
-
+            Intent backIntent = new Intent(ViewTransaction.this, SettleUp.class);
+            startActivity(backIntent);
+            finish();
         });
 
         addTransButton.setOnClickListener(v -> {
-            if (v.getId() == R.id.goToAddTrans) {
-                Intent backIntent = new Intent(ViewTransaction.this, addTransDetails.class);
-                startActivity(backIntent);
-            }
+            Intent backIntent = new Intent(ViewTransaction.this, addTransDetails.class);
+            startActivity(backIntent);
+            finish();
         });
 
-
-        goToBackButton.setOnClickListener(v -> {
-            if (v.getId() == R.id.goToBackButton) {
-                Intent backIntent = new Intent(ViewTransaction.this, MainActivity.class);
-                startActivity(backIntent);
-            }
-        });
-
-
-        goToHomeButton.setOnClickListener(v -> {
-            if (v.getId() == R.id.goToHomeButton) {
-                Intent homeIntent = new Intent(ViewTransaction.this, MainActivity.class);
-                startActivity(homeIntent);
-            }
-        });
+        goToBackButton.setOnClickListener(v -> finish());
+        goToHomeButton.setOnClickListener(v -> finish());
 
         lv1 = findViewById(R.id.lv1);
-        dataBaseHelper dataBaseHelper = new dataBaseHelper(ViewTransaction.this);
-        customBaseAdapter customBaseAdapter = new customBaseAdapter(getApplicationContext(), dataBaseHelper.getEveryTrans());
-        lv1.setAdapter(customBaseAdapter);
-
+        customBaseAdapter customAdapter = new customBaseAdapter(this, dbHelper.getEveryTrans());
+        lv1.setAdapter(customAdapter);
     }
 }
 

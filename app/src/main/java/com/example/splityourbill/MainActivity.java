@@ -1,7 +1,5 @@
 package com.example.splityourbill;
 
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,29 +7,33 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     public Button createGroupButton;
     public Button addTransButton, showTransButton;
     public Button resetAll, settleUp;
-    TextView noPersonText;
-    ListView lv1;
-    TextView top, topName, groupName;
-    Button editPersonButton;
+    private TextView noPersonText;
+    private ListView lv1;
+    private TextView top, topName, groupName;
+    private Button editPersonButton;
 
-    ConstraintLayout initialHomePage, summaryHomePage;
+    private ConstraintLayout initialHomePage, summaryHomePage;
 
-    dataBaseHelper dataBaseHelper = new dataBaseHelper(MainActivity.this);
+    private dataBaseHelper dbHelper;
 
-    @SuppressLint("UnsafeIntentLaunch")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dbHelper = new dataBaseHelper(this);
 
         top = findViewById(R.id.textViewTop);
         topName = findViewById(R.id.textViewTopName);
@@ -47,40 +49,12 @@ public class MainActivity extends AppCompatActivity {
         lv1 = findViewById(R.id.lv1);
 
         initialHomePage = findViewById(R.id.initialHomePage);
-        summaryHomePage = findViewById(R.id.summeryHomePage);
-
+        summaryHomePage = findViewById(R.id.summaryHomePage);
 
         showTransButton.setOnClickListener(v -> {
             Intent showTransIntent = new Intent(MainActivity.this, ViewTransaction.class);
             startActivity(showTransIntent);
         });
-
-        ShowPerson(dataBaseHelper);
-        int numberOfPerson = dataBaseHelper.getEveryOne().size();
-        int numberOfTrans = dataBaseHelper.getEveryTrans().size();
-
-        if (numberOfPerson == 0 && dataBaseHelper.getEveryGroup().size() == 1) {
-            System.out.println("No person");
-            noPersonText.setVisibility(View.VISIBLE);
-
-        }
-        if (numberOfPerson >= 2) {
-            addTransButton.setEnabled(true);
-        }
-
-        if (dataBaseHelper.getEveryGroup().size() == 1) {
-            initialHomePage.setVisibility(View.GONE);
-            summaryHomePage.setVisibility(View.VISIBLE);
-            groupName.setText(dataBaseHelper.getEveryGroup().get(0).getGroupName());
-            settleUp.setEnabled(false);
-            showTransButton.setEnabled(false);
-
-        }
-        if (numberOfTrans > 0) {
-            settleUp.setEnabled(true);
-            showTransButton.setEnabled(true);
-        }
-
 
         editPersonButton.setOnClickListener(v -> {
             Intent addPersonIntent = new Intent(MainActivity.this, createGroupAddName.class);
@@ -97,49 +71,63 @@ public class MainActivity extends AppCompatActivity {
             startActivity(createGroupIntent);
         });
 
-
         resetAll.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Confirmation").setMessage("Are you sure you want to reset?").setPositiveButton("Yes", (dialog, which) -> {
-                dataBaseHelper.clearDatabase();
-                finish();
-                startActivity(getIntent());
-            }).setNegativeButton("No", (dialog, which) -> {
-                // Do nothing or handle the cancel action
-            }).show();
+            new AlertDialog.Builder(this)
+                    .setTitle("Confirmation")
+                    .setMessage("Are you sure you want to reset?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        dbHelper.clearDatabase();
+                        refreshData();
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
         });
-
 
         addTransButton.setOnClickListener(v -> {
             Intent addTransIntent = new Intent(MainActivity.this, addTransDetails.class);
             startActivity(addTransIntent);
         });
 
-    }
-
-    private void ShowPerson(dataBaseHelper dataBaseHelper) {
-        lv1 = findViewById(R.id.lv1);
-        customNameBaseAdapter customNameBaseAdapter = new customNameBaseAdapter(getApplicationContext(), dataBaseHelper.getEveryOne());
-        lv1.setAdapter(customNameBaseAdapter);
-    }
-
-    @SuppressLint("UnsafeIntentLaunch")
-    public void onRestart() {
-        super.onRestart();
-        finish();
-        startActivity(getIntent());
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Confirmation")
+                        .setMessage("Are you sure you want to exit?")
+                        .setPositiveButton("Yes", (dialog, which) -> finish())
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
     }
 
     @Override
-    public void onBackPressed() {
+    protected void onResume() {
+        super.onResume();
+        refreshData();
+    }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirmation").setMessage("Are you sure you want to exit?").setPositiveButton("Yes", (dialog, which) -> {
-            finishAffinity();
-            System.exit(0);
-        }).setNegativeButton("No", (dialog, which) -> {
-            // Do nothing or handle the cancel action
-        }).show();
+    private void refreshData() {
+        List<person> people = dbHelper.getEveryOne();
+        List<Group> groups = dbHelper.getEveryGroup();
+        List<TransactionModel> transactions = dbHelper.getEveryTrans();
 
+        customNameBaseAdapter customNameAdapter = new customNameBaseAdapter(this, people);
+        lv1.setAdapter(customNameAdapter);
+
+        boolean hasGroup = groups.size() == 1;
+        if (hasGroup) {
+            initialHomePage.setVisibility(View.GONE);
+            summaryHomePage.setVisibility(View.VISIBLE);
+            groupName.setText(groups.get(0).getGroupName());
+        } else {
+            initialHomePage.setVisibility(View.VISIBLE);
+            summaryHomePage.setVisibility(View.GONE);
+        }
+
+        noPersonText.setVisibility((people.isEmpty() && hasGroup) ? View.VISIBLE : View.GONE);
+        addTransButton.setEnabled(people.size() >= 2);
+        settleUp.setEnabled(hasGroup && !transactions.isEmpty());
+        showTransButton.setEnabled(hasGroup && !transactions.isEmpty());
     }
 }

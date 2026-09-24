@@ -1,11 +1,20 @@
-# Built application files
+# Built application & bundle files
 *.apk
 *.ap_
 *.aab
 *.dex
+*.aar
+output-metadata.json
 
-# Java class files
+# Release & debug output directories
+release/
+debug/
+app/release/
+app/debug/
+
+# Java / Kotlin compiled files
 *.class
+.kotlin/
 
 # Generated build files
 build/
@@ -16,43 +25,50 @@ out/
 captures/
 .navigation/
 
-# Gradle files
+# Gradle files & caches
 .gradle/
 reports/
+gradle-app.setting
+!gradle/wrapper/gradle-wrapper.jar
 
-# Local configuration files
+# Local configuration & environment files
 local.properties
+keystore.properties
+signing.properties
 .bundle/
+.env
+*.env
 
-# IntelliJ / Android Studio
+# IntelliJ / Android Studio IDE files
 *.iml
-.idea/caches/
-.idea/libraries/
-.idea/modules.xml
-.idea/workspace.xml
-.idea/navEditor.xml
-.idea/assetWizardSettings.xml
-.idea/deploymentTargetSelector.xml
-.idea/AndroidProjectSystem.xml
-.idea/migrations.xml
-.idea/runConfigurations.xml
-.idea/markdown.xml
-.idea/shelf/
-.idea/sonarlint/
-.idea/inspectionProfiles/
+*.ipr
+*.iws
+.idea/
 
 # Keystores and signing keys
 *.jks
 *.keystore
 *.key
 *.p12
+*.pem
 
-# ProGuard / R8 mapping files
+# ProGuard / R8 outputs & mapping files
 mapping.txt
+seeds.txt
+usage.txt
+configuration.txt
+resources.txt
 
 # Native builds
 .externalNativeBuild/
 .cxx/
+
+# Lint, Test & Profiler outputs
+*.log
+*.hprof
+lint-results*.html
+lint-results*.xml
+lint-results*.sarif
 
 # OS-specific files
 .DS_Store
@@ -63,10 +79,3 @@ mapping.txt
 ehthumbs.db
 Thumbs.db
 [Dd]esktop.ini
-
-# Log and Profiler files
-*.log
-*.hprof
-
-# Kotlin
-.kotlin

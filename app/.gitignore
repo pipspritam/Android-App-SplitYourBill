@@ -1,1 +1,7 @@
 /build
+/release
+/debug
+*.apk
+*.aab
+mapping.txt
+output-metadata.json

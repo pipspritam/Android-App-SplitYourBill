@@ -58,15 +58,15 @@ public class customNameBaseAdapter extends BaseAdapter {
 
         if (balance < -0.005) {
             holder.textView.setText(String.format(Locale.getDefault(), "%s owes ", item.getName()));
-            holder.textViewAmount.setTextColor(Color.parseColor("#FF0000"));
+            holder.textViewAmount.setTextColor(Color.parseColor("#D32F2F"));
             holder.textViewAmount.setText(String.format(Locale.getDefault(), "Rs %.2f", Math.abs(balance)));
         } else if (balance > 0.005) {
             holder.textView.setText(String.format(Locale.getDefault(), "%s gets ", item.getName()));
-            holder.textViewAmount.setTextColor(Color.parseColor("#64ED26"));
+            holder.textViewAmount.setTextColor(Color.parseColor("#2E7D32"));
             holder.textViewAmount.setText(String.format(Locale.getDefault(), "Rs %.2f", balance));
         } else {
             holder.textView.setText(String.format(Locale.getDefault(), "%s has no balance", item.getName()));
-            holder.textViewAmount.setTextColor(Color.parseColor("#64ED26"));
+            holder.textViewAmount.setTextColor(Color.parseColor("#2E7D32"));
             holder.textViewAmount.setText(String.format(Locale.getDefault(), "Rs 0.00"));
         }
         return convertView;

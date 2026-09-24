@@ -73,6 +73,19 @@ public class addTransDetails extends AppCompatActivity {
         String[] names = getNameList();
         selectedPerson = new boolean[names.length];
 
+        if (savedInstanceState != null) {
+            boolean[] savedChecks = savedInstanceState.getBooleanArray("selectedPerson");
+            ArrayList<Integer> savedIndices = savedInstanceState.getIntegerArrayList("selectedPersonIndices");
+            if (savedChecks != null && savedChecks.length == names.length) {
+                selectedPerson = savedChecks;
+            }
+            if (savedIndices != null) {
+                selectedPersonIndices.clear();
+                selectedPersonIndices.addAll(savedIndices);
+                updateSelectedItems();
+            }
+        }
+
         textViewInvolvedPeople.setOnClickListener(v -> {
             String[] currentNames = getNameList();
             if (selectedPerson == null || selectedPerson.length != currentNames.length) {
@@ -171,6 +184,13 @@ public class addTransDetails extends AppCompatActivity {
                 Arrays.fill(selectedPerson, false);
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBooleanArray("selectedPerson", selectedPerson);
+        outState.putIntegerArrayList("selectedPersonIndices", selectedPersonIndices);
     }
 
     private void updateSelectedItems() {

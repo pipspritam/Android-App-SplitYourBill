@@ -10,8 +10,8 @@ android {
         applicationId "com.easySplit.splityourbill"
         minSdk 24
         targetSdk 36
-        versionCode 9
-        versionName "1.9"
+        versionCode 10
+        versionName "2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -19,6 +19,7 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class SettleUp extends AppCompatActivity {
     private ListView lv;
     private ArrayAdapter<String> settleUpArrayAdapter;
     private Button goToHomeButton, viewTransButton, resetButton;
+    private ImageButton goToBackButton;
     private TextView groupNameTextView;
     private final dataBaseHelper dbHelper = new dataBaseHelper(this);
 
@@ -33,9 +35,12 @@ public class SettleUp extends AppCompatActivity {
 
         lv = findViewById(R.id.settleUpListView);
         goToHomeButton = findViewById(R.id.goToHomeButton);
+        goToBackButton = findViewById(R.id.goToBackButton);
         viewTransButton = findViewById(R.id.showTransButton);
         groupNameTextView = findViewById(R.id.viewGroupName);
         resetButton = findViewById(R.id.resetButton);
+
+        goToBackButton.setOnClickListener(v -> finish());
 
         List<Group> groups = dbHelper.getEveryGroup();
         if (!groups.isEmpty()) {

@@ -5,9 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:padding="5dp"
     tools:context=".SettleUp">
+
+    <ImageButton
+        android:id="@+id/goToBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@color/transparent"
+        android:contentDescription="@string/just_a_icon"
+        android:padding="10dp"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
 
     <TextView
         android:id="@+id/textView"
@@ -39,13 +53,15 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/white"
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/showTransButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +71,7 @@
         <ListView
             android:id="@+id/settleUpListView"
             android:layout_width="match_parent"
-            android:layout_height="400dp" />
+            android:layout_height="match_parent" />
 
     </androidx.cardview.widget.CardView>
 
